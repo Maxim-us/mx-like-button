@@ -1,0 +1,78 @@
+<?php
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+final class MXMLBMXLikeButton
+{
+
+	/*
+	* MXMLBMXLikeButton constructor
+	*/
+	public function __construct()
+	{
+
+		$this->define_constants();
+		
+		$this->mxmlb_include();
+
+	}
+
+	/*
+	* Define MXMLB constants
+	*/
+	public function define_constants()
+	{
+
+		$this->mxmlb_define( 'MXMLB_TABLE_SLUGS', array( 'mx_like_options', 'mx_like_store' ) );
+
+		// include php files
+		$this->mxmlb_define( 'MXMLB_PLUGIN_ABS_PATH', dirname( MXMLB_PLUGIN_PATH ) . '\\' );
+
+		// version
+		$this->mxmlb_define( 'MXMLB_PLUGIN_VERSION', time() ); // Must be replaced before production on for example '1.0'
+
+
+	}
+
+	/*
+	* Incude required core files
+	*/
+	public function mxmlb_include()
+	{
+
+		// Basis functions
+		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\class-basis-plugin-class.php';
+
+		// Helpers
+		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\core\helpers.php';
+
+		// Part of the Frontend
+		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\frontend\class-frontend-main.php';
+
+		// Part of the Administrator
+		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\admin\class-admin-main.php';
+
+		/*
+		* CPT class
+		* If you do not need CPT, delete the line below
+		*/
+		// require_once MXMLB_PLUGIN_ABS_PATH . 'includes\admin\class-cpt-talk.php';
+
+	}
+
+	// Define function
+	private function mxmlb_define( $mame, $value )
+	{
+
+		if( ! defined( $mame ) )
+		{
+
+			define( $mame, $value );
+
+		}
+
+	}
+
+
+}
