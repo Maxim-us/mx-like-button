@@ -12,9 +12,9 @@ final class MXMLBMXLikeButton
 	public function __construct()
 	{
 
-		$this->define_constants();
+		$this->define_constants();		
 		
-		$this->mxmlb_include();
+		add_action( 'init', array( $this, 'mxmlb_include' ) );
 
 	}
 
@@ -47,8 +47,14 @@ final class MXMLBMXLikeButton
 		// Helpers
 		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\core\helpers.php';
 
-		// Part of the Frontend
-		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\frontend\class-frontend-main.php';
+		
+		// check, if current user is login
+		if( is_user_logged_in() ) {
+
+			// Part of the Frontend
+			require_once MXMLB_PLUGIN_ABS_PATH . 'includes\frontend\class-frontend-main.php';
+
+		}
 
 		// Part of the Administrator
 		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\admin\class-admin-main.php';

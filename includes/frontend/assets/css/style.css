@@ -1,1 +1,66 @@
 /*css styles*/
+.mx-like-box {
+	position: relative;
+	display: inline-block;
+	min-width: 160px;
+	height: 40px;
+	border: 1px solid #ddd;
+}
+.mx-like-box button.mx-like-main-button {
+	border: none;
+	width: 50px;
+	height: 100%;
+	padding: 0;
+	background: transparent;
+	/*position: absolute;*/
+	z-index: 889;
+}
+.mx-like-other-faces {
+	width: 276px;
+    position: absolute;
+    z-index: 888;
+    background: #ddd;
+	top: 40px;
+	height: 0px;
+	overflow: hidden;
+}
+.mx-like-other-faces button {
+	font-size: 10px !important;
+    width: 40px !important;
+    height: 40px;
+    overflow: hidden;
+    display: inline-block;
+    padding: 0px !important;
+}
+
+/*hover like button*/
+.mx-like-other-faces:hover,
+.mx-like-other-faces-active {
+	height: 40px;
+    top: -40px;
+    right: 0;
+}
+.mx-like-other-faces-active {
+	-webkit-transition: 0.3s all ease;
+    transition: 0.3s all ease;
+}
+
+/*mx-like-place*/
+.mx-like-place {
+	width: 300px;
+    float: left;
+}
+.mx-like-place-faces,
+.mx-like-place-count {
+	display: inline-block;
+}
+.mx-like-place .mx-like-place-faces span {
+    width: 40px;
+    height: 40px;
+    font-size: 9px;
+    display: inline-block;
+    float: none;
+    line-height: 9px;
+    padding: 0;
+	border: 1px solid #333;
+}

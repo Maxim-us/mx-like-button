@@ -13,6 +13,15 @@ function mxmlb_require_template_admin( $file ) {
 }
 
 /*
+* Require template for frontend part
+*/
+function mxmlb_include_template_frontend( $file ) {
+
+	include MXMLB_PLUGIN_ABS_PATH . 'includes\frontend\templates\\' . $file;
+
+}
+
+/*
 * Select data
 */
 function mxmlb_select_script() {

@@ -25,6 +25,30 @@ class MXMLBFrontEndMain
 
 			wp_enqueue_script( 'mxmlb_script', MXMLB_PLUGIN_URL . 'includes/frontend/assets/js/script.js', array( 'jquery' ), MXMLB_PLUGIN_VERSION, false );
 
+			// localize like object
+			wp_localize_script( 'mxmlb_script', 'mxmlb_object_likes', 'dummy' );
+
+			// localize current user data
+			wp_localize_script( 'mxmlb_script', 'mxmlb_current_user_data', array( 'id' => get_current_user_id() ) );
+
+
+		}
+
+	/*
+	* Hooks. Creation like button
+	*/
+	public function mxmlb_show_like_button_hooks()
+	{
+
+		add_action( 'bp_activity_entry_meta', array( $this, 'mxmlb_show_like_button_activity' ) );
+
+	}
+
+		public function mxmlb_show_like_button_activity()
+		{
+
+			mxmlb_include_template_frontend( 'mx-like-box.php' );
+
 		}
 
 }
@@ -34,3 +58,7 @@ $initialize_class = new MXMLBFrontEndMain();
 
 // Apply scripts and styles
 $initialize_class->mxmlb_register();
+
+// show like button
+$initialize_class->mxmlb_show_like_button_hooks();
+
