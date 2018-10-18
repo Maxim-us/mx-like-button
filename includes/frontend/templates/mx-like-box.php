@@ -10,14 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 	<div class="mx-like-place">
 
 		<div class="mx-like-place-faces">
-			<span class="mx-like mx-like-hide">like</span>
-			<span class="mx-heart mx-like-hide">heart</span>
-			<span class="mx-laughter mx-like-hide">laughter</span>
-			<span class="mx-wow mx-like-hide">wow</span>
-			<span class="mx-sad mx-like-hide">sad</span>
-			<span class="mx-angry mx-like-hide">angry</span>
+			<span class="mx-like">like</span>
+			<span class="mx-heart">heart</span>
+			<span class="mx-laughter">laughter</span>
+			<span class="mx-wow">wow</span>
+			<span class="mx-sad">sad</span>
+			<span class="mx-angry">angry</span>
 		</div>
-		<div class="mx-like-place-count">10</div>
+		<div class="mx-like-place-count mx-display-none">0</div>
 
 	</div>
 

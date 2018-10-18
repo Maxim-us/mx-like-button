@@ -58,9 +58,16 @@
     width: 40px;
     height: 40px;
     font-size: 9px;
-    display: inline-block;
+    display: none;
     float: none;
     line-height: 9px;
     padding: 0;
 	border: 1px solid #333;
+}
+
+.mx-like-place .mx-like-place-faces span.mx-like-active {
+	display: inline-block;
+}
+.mx-display-none {
+	display: none !important;	
 }
