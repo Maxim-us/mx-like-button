@@ -35,3 +35,18 @@ function mxmlb_select_script() {
 	return $get_scripts_string->option1;
 
 }
+
+/*
+* Select data likes
+*/
+function mxmlb_select_data_likes() {
+
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
+
+	$get_data_likes = $wpdb->get_results( "SELECT id, post_id, user_ids FROM $table_name ORDER BY id ASC" );
+
+	return $get_data_likes;
+
+}
