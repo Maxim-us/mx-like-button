@@ -57,6 +57,14 @@ class MXMLBAdminMain
 
 			wp_enqueue_script( 'mxmlb_admin_script', MXMLB_PLUGIN_URL . 'includes/admin/assets/js/script.js', array( 'jquery' ), MXMLB_PLUGIN_VERSION, false );
 
+			// localize like object
+			wp_localize_script( 'mxmlb_admin_script', 'mxmlb_admin_localize', array(
+
+				'ajaxurl' 					=> admin_url( 'admin-ajax.php' ),
+				'mxmlb_admin_nonce' 		=> wp_create_nonce( 'mxmlb_admin_nonce_request' )
+
+			) );
+
 		}
 
 		// register admin menu

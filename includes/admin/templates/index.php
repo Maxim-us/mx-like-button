@@ -5,19 +5,31 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 ?>
 
-<h1><?php echo __( 'Settings Page', 'mxmlb-domain' ); ?></h1>
+<h1><?php echo __( 'Like button settings', 'mxmlb-domain' ); ?></h1>
+
+<h2><?php echo __( 'You can change the image below.', 'mxmlb-domain' ); ?></h2>
 
 <div class="mx-block_wrap">
 
-	<form id="mxmlb_form_update" class="mx-settings" method="post" action="">
+	<h3><?php echo __( 'Like button', 'mxmlb-domain' ); ?></h3>
 
-		<h2>Default script</h2>
-		<textarea name="mxmlb_some_string" id="mxmlb_some_string"><?php echo mxmlb_select_script(); ?></textarea>
+	<form enctype="multipart/form-data" action="" method="POST" class="mxmlb_form_upload_like_img">
 
-		<p class="mx-submit_button_wrap">
-			<input type="hidden" id="mxmlb_wpnonce" name="mxmlb_wpnonce" value="<?php echo wp_create_nonce( 'mxmlb_nonce_request' ) ;?>" />
-			<input class="button-primary" type="submit" name="mxmlb-submit" value="Save" />
-		</p>
+		<input id="lb_upload_like" class="lb_upload_img" type="file" />
+		<input type="submit" value="<?php echo __( 'Upload Image', 'mxmlb-domain' ); ?>" />
+
+	</form>
+
+</div>
+
+<div class="mx-block_wrap">
+
+	<h3><?php echo __( 'Heart button', 'mxmlb-domain' ); ?></h3>
+
+	<form enctype="multipart/form-data" action="" method="POST" class="mxmlb_form_upload_like_img">
+
+		<input id="lb_upload_heart" class="lb_upload_img" type="file" />
+		<input type="submit" value="<?php echo __( 'Upload Image', 'mxmlb-domain' ); ?>" />
 
 	</form>
 

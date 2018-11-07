@@ -82,7 +82,16 @@
 }
 .mx-like-place-faces,
 .mx-like-place-count {
-	display: inline-block;	
+	display: block;
+	height: 20px;
+	line-height: 0px;
+	margin-top: 6px;
+	float: left;
+}
+.mx-like-place-count {
+	line-height: 20px;
+	padding-top: 3px;
+	padding-left: 9px;
 }
 .mx-like-place .mx-like-place-faces {
 	padding-left: 16px;

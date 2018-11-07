@@ -15,48 +15,6 @@ jQuery( document ).ready( function( $ ){
 		};
 
 	}
-	
-	// mxmlb_localize.mxmlb_object_likes = {
-	// 	42: {
-	// 		2: {
-	// 			'typeOfLike': 'like'
-	// 		},
-	// 		4: {
-	// 			'typeOfLike': 'wow'
-	// 		},
-	// 		3: {
-	// 			'typeOfLike': 'wow'
-	// 		}
-			
-	// 	},
-	// 	41: {
-	// 		3: {
-	// 			'typeOfLike': 'sad'
-	// 		},
-	// 		2: {
-	// 			'typeOfLike': 'wow'
-	// 		}
-			
-	// 	},
-	// 	25: {
-	// 		3: {
-	// 			'typeOfLike': 'sad'
-	// 		}			
-	// 	},
-	// 	46: {
-	// 		2: {
-	// 			'typeOfLike': 'like'
-	// 		},
-	// 		1: {
-	// 			'typeOfLike': 'wow'
-	// 		},
-	// 		3: {
-	// 			'typeOfLike': 'wow'
-	// 		}
-			
-	// 	},
-		
-	// };
 
 	/*
 	* Show like-button system
