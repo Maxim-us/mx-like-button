@@ -13,17 +13,17 @@ class MXMLBBasisPluginClass
 	{
 
 		// set option for rewrite rules CPT
-		self::create_option_for_activation();
+		// self::create_option_for_activation();
 
 		// Create table
 		global $wpdb;
 
 		// Table names
-		foreach ( self::$table_slugs as $table_slug) {
+		foreach ( self::$table_slugs as $table_slug ) {
 
 			$table_name = $wpdb->prefix . $table_slug;
 
-			if ( $wpdb->get_var( "SHOW TABLES LIKE '" . $table_name . "'" ) !=  $table_name )
+			if ( $wpdb->get_var( "SHOW TABLES LIKE '" . $table_name . "'" ) !==  $table_name )
 			{
 
 				/*
@@ -36,20 +36,31 @@ class MXMLBBasisPluginClass
 					$sql = "CREATE TABLE IF NOT EXISTS `$table_name`
 					(
 						`id` int(11) NOT NULL AUTO_INCREMENT,
-						`option1` varchar(40) NOT NULL,
+						`mx_like_imds_array` longtext NOT NULL,
 						PRIMARY KEY (`id`)
 					) ENGINE=MyISAM DEFAULT CHARSET=$wpdb->charset AUTO_INCREMENT=1;";
 
 					$wpdb->query( $sql );
 
 					// Insert dummy data
+					$mx_like_imds = array(
+						'like' 		=> '',
+						'heart' 	=> '',
+						'laughter' 	=> '',
+						'wow' 		=> '',
+						'sad' 		=> '',
+						'angry' 	=> ''
+					);
+
+					$mx_like_imds_array = serialize( $mx_like_imds );
+
 					$wpdb->insert(
 
 						$table_name,
-
 						array(
-							'option1' => 'Some option',
-						)
+							'mx_like_imds_array' => $mx_like_imds_array
+						),
+						array( '%s' )
 
 					);
 
@@ -91,7 +102,7 @@ class MXMLBBasisPluginClass
 	public static function create_option_for_activation()
 	{
 
-		add_option( 'mxmlb_flush_rewrite_rules', 'go_flush_rewrite_rules' );
+		// add_option( 'mxmlb_flush_rewrite_rules', 'go_flush_rewrite_rules' );
 
 	}
 

@@ -41,8 +41,7 @@ final class MXMLBMXLikeButton
 	public function mxmlb_include()
 	{
 
-		// Basis functions
-		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\class-basis-plugin-class.php';
+		
 
 		// Helpers
 		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\core\helpers.php';
@@ -78,6 +77,12 @@ final class MXMLBMXLikeButton
 
 		}
 
+	}
+
+	public function mxmlb_basic_pugin_function()
+	{
+		// Basis functions
+		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\class-basis-plugin-class.php';
 	}
 
 

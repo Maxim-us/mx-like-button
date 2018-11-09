@@ -19,9 +19,9 @@ jQuery( document ).ready( function( $ ){
 
 			};
 
-			// mxmlb_talkig_admin_data( data );
+			mxmlb_talkig_admin_data( data );
 
-			console.log( data );
+			// console.log( data );
 
 		}		
 

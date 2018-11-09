@@ -52,7 +52,10 @@ if ( ! class_exists( 'MXMLBMXLikeButton' ) ) {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-final-main-class.php';
 
 	// Create new instance
-	new MXMLBMXLikeButton();
+	$mxmlbmxlikebutton = new MXMLBMXLikeButton();
+
+	// activation|deactivation class include
+	$mxmlbmxlikebutton->mxmlb_basic_pugin_function();
 
 	/*
 	* Registration hooks

@@ -50,7 +50,7 @@ class MXMLBDataBaseTalkFrontend
 			$post_id = intval( $_POST['mxmlb_object_likes']['post_id'] );
 
 			// if post id is exists
-			$post_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM $table_name WHERE post_id = $post_id"  ) );
+			$post_count = count( mxmlb_select_data_likes_by_post_id( $post_id ) );
 
 			if( $post_count == 0 ) {
 
@@ -62,7 +62,7 @@ class MXMLBDataBaseTalkFrontend
 				// Update data
 				$this->update_like_obj( $_POST['mxmlb_object_likes'], $post_id );	
 
-			}			
+			}
 
 		}
 

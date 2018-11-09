@@ -88,14 +88,6 @@ class MXMLBFrontEndMain
 	public function mxmlb_get_data_of_likes()
 	{
 
-		// array(
-		// 	1 => array(
-		// 		2 => array(
-		// 			'typeOfLike' => 'like'
-		// 		)
-		// 	)
-		// )
-
 		$array_likes_data = 0;
 
 		if( count( mxmlb_select_data_likes() ) >= 1 ) {

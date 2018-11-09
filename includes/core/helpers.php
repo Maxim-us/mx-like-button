@@ -22,21 +22,6 @@ function mxmlb_include_template_frontend( $file ) {
 }
 
 /*
-* Select data
-*/
-function mxmlb_select_script() {
-
-	global $wpdb;
-
-	$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[0];
-
-	$get_scripts_string = $wpdb->get_row( "SELECT option1 FROM $table_name WHERE id = 1" );
-
-	return $get_scripts_string->option1;
-
-}
-
-/*
 * Select data likes
 */
 function mxmlb_select_data_likes() {
@@ -46,6 +31,21 @@ function mxmlb_select_data_likes() {
 	$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
 
 	$get_data_likes = $wpdb->get_results( "SELECT id, post_id, user_ids FROM $table_name ORDER BY id ASC" );
+
+	return $get_data_likes;
+
+}
+
+/*
+* Select data likes by post id
+*/
+function mxmlb_select_data_likes_by_post_id( $post_id ) {
+
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
+
+	$get_data_likes = $wpdb->get_row( "SELECT user_ids FROM $table_name WHERE post_id = $post_id"  );
 
 	return $get_data_likes;
 
