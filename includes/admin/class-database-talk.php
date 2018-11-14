@@ -55,20 +55,85 @@ class MXMLBDataBaseTalk
 
 			$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[0];
 
-			// var_dump( $table_name );
+			$upload_images_serialize = mxmlb_like_options( '_upload_images' )->mx_like_option_value;
 
-			// $wpdb->update(
+			// options
+			$upload_images_array = maybe_unserialize( $upload_images_serialize );
 
-			// 	$table_name, 
-			// 	array(
-			// 		'option1' => $clean_string,
-			// 	), 
-			// 	array( 'id' => 1 ), 
-			// 	array( 
-			// 		'%s'
-			// 	)
+			// $_POST
+			// type of like
+			$type_of_like = $_post_['type_of_like'];
 
-			// );
+			// $_FILE
+			$_file_ = $_FILES['file'];
+
+			// upload file
+			if ( ! function_exists( 'wp_handle_upload' ) ) {
+
+				require_once( ABSPATH . 'wp-admin/includes/file.php' );
+
+			}
+		
+			$overrides = array(
+				'test_form' => false,
+				'unique_filename_callback' => array( $this, 'mx_change_img_name' ) 
+			);
+
+			$movefile = wp_handle_upload( $_file_, $overrides );
+
+			if ( $movefile && empty($movefile['error']) ) {				
+
+				$img_url = $movefile['url'];
+
+				// cut path into format /wp-content/uploads/2018/11/1542189679.png"
+				$matches = array();
+
+				preg_match('/(\wp-content\/.*)/', $img_url, $matches);
+
+				$cut_img_url = $matches[0];
+
+				// update array
+				foreach ( $upload_images_array as $key => $value ) {
+
+					if( $type_of_like == $key ) {
+
+						$upload_images_array[$key] = $cut_img_url;
+
+					}
+					
+				}
+
+				$upload_images_array = serialize( $upload_images_array );
+
+				$wpdb->update(
+
+					$table_name, 
+					array(
+						'mx_like_option_value' => $upload_images_array,
+					), 
+					array( 'mx_like_option_name' => '_upload_images' ), 
+					array( 
+						'%s'
+					)
+
+				);
+
+				echo 1;
+
+			} else {
+
+				var_dump( $movefile );
+
+			}			
+
+		}
+
+		// change img name
+		public function mx_change_img_name( $dir, $name, $ext ) {
+
+			$new_name = time();
+
+			return $new_name.$ext;
 
 		}
 

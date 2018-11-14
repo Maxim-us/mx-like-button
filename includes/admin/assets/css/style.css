@@ -36,3 +36,36 @@
 .mx-block_wrap .thickbox img {
     width: 200px;
 }
+.mx-block_wrap h3 {
+    text-transform: capitalize;
+}
+.mx-like-preview-wrap {
+    position: relative;
+    float: right;
+    margin-top: -32px;
+    width: 50px;
+    height: auto;
+}
+.mx-like-preview-wrap button.mx-btn-remove {
+    position: absolute;
+    right: 0;
+    top: -7px;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.mx-like-preview-wrap button.mx-btn-remove:hover {
+    background: #ddd;
+    border: 1px solid red;
+}
+.mx-like-preview-wrap button.mx-btn-remove:hover i {
+    color: red;
+}
+.mx-like-preview-wrap button.mx-btn-remove i {
+    color: #ddd;
+}
+img.mx-like-preview {
+    width: 100%;
+}

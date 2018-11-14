@@ -36,7 +36,8 @@ class MXMLBBasisPluginClass
 					$sql = "CREATE TABLE IF NOT EXISTS `$table_name`
 					(
 						`id` int(11) NOT NULL AUTO_INCREMENT,
-						`mx_like_imds_array` longtext NOT NULL,
+						`mx_like_option_name` varchar(40) NOT NULL,
+						`mx_like_option_value` longtext NOT NULL,
 						PRIMARY KEY (`id`)
 					) ENGINE=MyISAM DEFAULT CHARSET=$wpdb->charset AUTO_INCREMENT=1;";
 
@@ -58,9 +59,10 @@ class MXMLBBasisPluginClass
 
 						$table_name,
 						array(
-							'mx_like_imds_array' => $mx_like_imds_array
+							'mx_like_option_name' 	=> '_upload_images',
+							'mx_like_option_value' 	=> $mx_like_imds_array
 						),
-						array( '%s' )
+						array( '%s', '%s' )
 
 					);
 

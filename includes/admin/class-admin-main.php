@@ -74,7 +74,7 @@ class MXMLBAdminMain
 			add_menu_page( __( 'Title of the page', 'mxmlb-domain' ), __( 'Mx Like Button', 'mxmlb-domain' ), 'manage_options', 'mxmlb-mx-like-button-menu', array( $this, 'admin_index' ), 'dashicons-image-filter', 111 ); // icons https://developer.wordpress.org/resource/dashicons/#id
 
 			// add submenu
-			add_submenu_page( 'mxmlb-mx-like-button-menu', __( 'Submenu title', 'mxmlb-domain' ), __( 'Submenu item', 'mxmlb-domain' ), 'manage_options', 'mxmlb-mx-like-button-submenu', array( $this, 'page_distributor' ) );
+			// add_submenu_page( 'mxmlb-mx-like-button-menu', __( 'Submenu title', 'mxmlb-domain' ), __( 'Submenu item', 'mxmlb-domain' ), 'manage_options', 'mxmlb-mx-like-button-submenu', array( $this, 'page_distributor' ) );
 
 		}
 
@@ -86,32 +86,32 @@ class MXMLBAdminMain
 
 			}
 
-			public function page_distributor()
-			{
+			// public function page_distributor()
+			// {
 
-				// require main menu
-				mxmlb_require_template_admin( 'main_module_menu.php' );
+			// 	// require main menu
+			// 	mxmlb_require_template_admin( 'main_module_menu.php' );
 
-				switch( $_GET['p'] ){
+			// 	switch( $_GET['p'] ){
 
-					case 'page1' :
-						$action = 'page1.php';
-						break;
+			// 		case 'page1' :
+			// 			$action = 'page1.php';
+			// 			break;
 
-					case 'page2' :
-						$action = 'page2.php';
-						break;
+			// 		case 'page2' :
+			// 			$action = 'page2.php';
+			// 			break;
 
-					default :
-						$action = 'index.php';
-						break;
+			// 		default :
+			// 			$action = 'index.php';
+			// 			break;
 
-				}
+			// 	}
 
-				// require pages
-				mxmlb_require_template_admin( $action );
+			// 	// require pages
+			// 	mxmlb_require_template_admin( $action );
 
-			}
+			// }
 
 		// add settings link
 		public function settings_link( $links )

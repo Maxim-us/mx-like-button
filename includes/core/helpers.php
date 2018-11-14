@@ -50,3 +50,18 @@ function mxmlb_select_data_likes_by_post_id( $post_id ) {
 	return $get_data_likes;
 
 }
+
+/*
+* Select data like options
+*/
+function mxmlb_like_options( $option_name ) {
+
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[0];
+
+	$option_value = $wpdb->get_row( "SELECT mx_like_option_value FROM $table_name WHERE mx_like_option_name = '$option_name'" );
+
+	return $option_value;
+
+}
