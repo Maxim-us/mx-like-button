@@ -40,10 +40,15 @@ class MXMLBFrontEndMain
 	public function mxmlb_register()
 	{
 
+		// enqueue
 		add_action( 'wp_enqueue_scripts', array( $this, 'mxmlb_enqueue' ) );
+
+		// add custom icons to the buttons
+		add_action( 'wp_head', array( $this, 'mxmlb_change_like_button_images' ) );
 
 	}
 
+		// wp_enqueue
 		public function mxmlb_enqueue()
 		{
 
@@ -129,6 +134,41 @@ class MXMLBFrontEndMain
 
 		return $array_likes_data;
 	}
+
+	// change image of buttons
+	public function mxmlb_change_like_button_images()
+	{
+
+		$upload_images_serialize = mxmlb_like_options( '_upload_images' )->mx_like_option_value;
+
+		$images_array = maybe_unserialize( $upload_images_serialize ); ?>
+
+		<style>
+
+		<?php foreach ( $images_array as $key => $value ) : ?>
+
+			<?php if( $value !== '' ) : ?>
+
+				<?php if( $key == 'like' ) : ?>
+
+					.mx-like-box button.mx-like-main-button span {
+						background-image: url(<?php echo get_site_url() . '/' . $value; ?>);
+					}
+
+				<?php endif; ?>
+				
+				span.mx-<?php echo $key; ?>,
+				.mx-like-face-<?php echo $key; ?> span {
+				    background-image: url(<?php echo get_site_url() . '/' . $value; ?>);
+				}
+
+			<?php endif; ?>			
+			
+		<?php endforeach; ?>
+
+		</style>
+
+	<?php }
 
 }
 

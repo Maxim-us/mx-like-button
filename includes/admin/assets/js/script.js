@@ -43,7 +43,7 @@ jQuery( document ).ready( function( $ ){
 
 		};
 
-		mxmlb_remove_image( data );
+		mxmlb_remove_image( data, $( this ) );
 
 	} );
 
@@ -61,11 +61,9 @@ function mxmlb_upload_new_image( data, form ) {
         processData: false,
         success: function( response ){
 
-        	console.log( response );
+            if( typeof response === 'string' ) {
 
-            if( parseInt( response ) === 1 ) {
-
-            	mxmlb_success_uploading_img( form )
+            	mxmlb_success_uploading_img( form, response );
 
             }
 
@@ -76,21 +74,36 @@ function mxmlb_upload_new_image( data, form ) {
 }
 
 // success uploading of img
-function mxmlb_success_uploading_img( form ) {
+function mxmlb_success_uploading_img( form, response ) {
 
 	form.find( '.lb_upload_img' ).val( '' );
+
+	form.parent().find( '.mx-like-preview' ).attr( 'src', response );
+
+	form.parent().find( '.mx-btn-remove' ).removeAttr( 'style' );
 
 }
 
 // remove image
-function mxmlb_remove_image( data ) {
+function mxmlb_remove_image( data, form ) {
 
-	console.log( data );
+	jQuery.post( mxmlb_admin_localize.ajaxurl, data, function( response ) {
 
-	// jQuery.post( mxmlb_admin_localize.ajaxurl, data, function( response ) {
+		if( typeof response === 'string' ) {
 
-	// 	console.log( response );
+			mxmlb_success_removing_img( form, response );
 
-	// } );
+		}
+
+	} );
+
+}
+
+// success removing img
+function mxmlb_success_removing_img( form, default_image ) {
+
+	form.parent().find( '.mx-like-preview' ).attr( 'src', default_image );
+
+	form.hide();
 
 }

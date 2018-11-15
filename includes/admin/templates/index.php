@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 <h1><?php echo __( 'Like button settings', 'mxmlb-domain' ); ?></h1>
 
-<h2><?php echo __( 'You can change the image below.', 'mxmlb-domain' ); ?></h2>
+<h2><?php echo __( 'You can change the images below.', 'mxmlb-domain' ); ?></h2>
 
 <?php 
 
