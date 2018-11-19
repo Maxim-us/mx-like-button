@@ -59,54 +59,32 @@ jQuery( document ).ready( function( $ ){
 	* reading the like object and set the like data
 	*/
 		// loading page
-		mxmlb_wait_for_Element( $, '.activity-list', function() {			
-			
-			$.each( mxmlb_localize.mxmlb_object_likes, function( key, value ) {
-
-				if( !$( '#' + 'mx-like-button-' + key ).hasClass( 'mx-it-notice' ) ) {
-
-					// set count
-					var countOfLikes = Object.keys( mxmlb_localize.mxmlb_object_likes[key] ).length
-
-					// count of likes
-					mxmlb_set_count_of_likes( $, key, countOfLikes );
-
-					// show according faces
-					mxmlb_show_like_faces( $, key );
-
-					// to notice the post
-					mxmlb_notice_the_post( $, key );
-
-				}
-
-			} );
-
-		} );
-		
-
-		// change activity stream
-
-		$( document ).on( 'click', '.load-more', function() {
+		if( $( '.activity-list' ).length ) {
 
 			mxmlb_load_more_activity( $, '.activity-list', function() {
 
-				console.log( 'Run likes' );
-
 				$.each( mxmlb_localize.mxmlb_object_likes, function( key, value ) {
 
-					if( !$( '#' + 'mx-like-button-' + key ).hasClass( 'mx-it-notice' ) ) {
+					if( $( '#' + 'mx-like-button-' + key ).length ) {
 
-						// set count
-						var countOfLikes = Object.keys( mxmlb_localize.mxmlb_object_likes[key] ).length
+						if( !$( '#' + 'mx-like-button-' + key ).hasClass( 'mx-it-notice' ) ) {
 
-						// count of likes
-						mxmlb_set_count_of_likes( $, key, countOfLikes );
+							// set count
+							var countOfLikes = Object.keys( mxmlb_localize.mxmlb_object_likes[key] ).length
 
-						// show according faces
-						mxmlb_show_like_faces( $, key );
+							// count of likes
+							mxmlb_set_count_of_likes( $, key, countOfLikes );
 
-						// to notice the post
-						mxmlb_notice_the_post( $, key );
+							// count per like
+							mxmlb_count_of_likes_per_like( $, key );
+
+							// show according faces
+							mxmlb_show_like_faces( $, key );
+
+							// to notice the post
+							mxmlb_notice_the_post( $, key );
+
+						}
 
 					}
 
@@ -114,23 +92,76 @@ jQuery( document ).ready( function( $ ){
 
 			} );
 
+		} else {
+
+			mxmlb_wait_for_Element( $, '.activity-list', function() {
+			
+				$.each( mxmlb_localize.mxmlb_object_likes, function( key, value ) {
+
+					if( $( '#' + 'mx-like-button-' + key ).length ) {
+
+						if( !$( '#' + 'mx-like-button-' + key ).hasClass( 'mx-it-notice' ) ) {
+					
+							// set count
+							var countOfLikes = Object.keys( mxmlb_localize.mxmlb_object_likes[key] ).length
+
+							// count of likes
+							mxmlb_set_count_of_likes( $, key, countOfLikes );
+
+							// count per like
+							mxmlb_count_of_likes_per_like( $, key );
+
+							// show according faces
+							mxmlb_show_like_faces( $, key );
+
+							// to notice the post
+							mxmlb_notice_the_post( $, key );
+
+						}	
+
+					}
+
+				} );
+
+			} );
+
+		}
+
+		// change activity stream
+		$( document ).on( 'click', '.load-more, .load-newest', function() {
+
+			mxmlb_load_more_activity( $, '.activity-list', function() {
+
+				$.each( mxmlb_localize.mxmlb_object_likes, function( key, value ) {
+
+					if( $( '#' + 'mx-like-button-' + key ).length ) {
+
+						if( !$( '#' + 'mx-like-button-' + key ).hasClass( 'mx-it-notice' ) ) {
+
+							// set count
+							var countOfLikes = Object.keys( mxmlb_localize.mxmlb_object_likes[key] ).length
+
+							// count of likes
+							mxmlb_set_count_of_likes( $, key, countOfLikes );
+
+							// count per like
+							mxmlb_count_of_likes_per_like( $, key );
+
+							// show according faces
+							mxmlb_show_like_faces( $, key );
+
+							// to notice the post
+							mxmlb_notice_the_post( $, key );
+
+						}
+
+					}
+
+				} );
+
+			} );
 
 		} );
-
-		// $( '.activity-list' ).on( 'DOMSubtreeModified', function() {
-
-		// 	$.each( mxmlb_localize.mxmlb_object_likes, function( key, value ) {
-
-		// 		// set count
-		// 		var countOfLikes = Object.keys( mxmlb_localize.mxmlb_object_likes[key] ).length
-
-		// 		mxmlb_set_count_of_likes( $, key, countOfLikes );
-
-		// 		alert( 'change' );
-
-		// 	} );
-
-		// } );
 
 	/*
 	* click like button
@@ -253,7 +284,7 @@ jQuery( document ).ready( function( $ ){
 
 							mxmlb_talkig_data( data );
 
-							console.log( 'delete' );
+							// console.log( 'delete' );
 
 						// or update like object
 						} else {
@@ -294,6 +325,9 @@ jQuery( document ).ready( function( $ ){
 
 				// count function
 				mxmlb_set_count_of_likes( $, postId, countObjects );
+
+				// count per like
+				mxmlb_count_of_likes_per_like( $, postId );
 
 				// show faces function
 				mxmlb_show_like_faces( $, postId );
@@ -376,6 +410,40 @@ function mxmlb_set_count_of_likes( $, postId, countObj ) {
 
 }
 
+// set count of likes per like
+function mxmlb_count_of_likes_per_like( $, postId ) {
+
+	var like_obj = {
+		like: 		0,
+		heart: 		0,
+		laughter: 	0,
+		wow: 		0,
+		sad: 		0,
+		angry: 		0
+	};
+
+	$.when(
+
+		$.each( mxmlb_localize.mxmlb_object_likes[postId], function( key, value ) {
+
+			var count_likes = parseInt( like_obj[value.typeOfLike] );
+
+			like_obj[value.typeOfLike] = like_obj[value.typeOfLike] + 1
+
+		} )
+
+	).then( function() {
+
+		$.each( like_obj, function( key, value ) {
+
+			$( '#mx-like-button-' + postId ).find( '.mx-' + key ).attr( 'title', value );
+
+		} )		
+
+	} );		
+
+}
+
 // show like faces
 function mxmlb_show_like_faces( $, postId ) {
 
@@ -404,21 +472,21 @@ function mxmlb_notice_the_post( $, postId ) {
 }
 
 // load element
-function mxmlb_wait_for_Element ($, selector, callback) {
+function mxmlb_wait_for_Element ( $, selector, callback ) {
 
-  if ( $( selector ).length ) {
+	if ( $( selector ).length ) {
 
-    callback();
+    	callback();
 
-  } else {
+	} else {
 
-    setTimeout( function() {
+    	setTimeout( function() {
 
-      mxmlb_wait_for_Element( $, selector, callback );
+			mxmlb_wait_for_Element( $, selector, callback );		
 
-    }, 100 );
+    	}, 100 );    	
 
-  }
+	}
 
 };
 
@@ -431,7 +499,7 @@ function mxmlb_load_more_activity( $, selector, callback ) {
 
 	setTimeout( function() {
 
-		console.log( mxmlb_app.load_more_key );
+		// console.log( mxmlb_app.load_more_key );
 
 		// run observe
 		if( mxmlb_app.load_more_key === false ) {
@@ -440,7 +508,7 @@ function mxmlb_load_more_activity( $, selector, callback ) {
 
 				mxmlb_load_more_activity( $, selector, callback );
 
-				console.log( 'On' );
+				// console.log( 'On' );
 
 			}, 10 );
 
@@ -451,7 +519,7 @@ function mxmlb_load_more_activity( $, selector, callback ) {
 
 			callback();
 
-			console.log( 'off' );
+			// console.log( 'off' );
 
 		}
 
@@ -470,7 +538,7 @@ function mxmlb_talkig_data( data ) {
 
 	jQuery.post( mxmlb_localize.ajaxurl, data, function( response ) {
 
-		console.log( response );
+		// console.log( response );
 
 	} );
 
