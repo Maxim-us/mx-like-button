@@ -71,7 +71,7 @@ class MXMLBAdminMain
 		public function add_admin_pages()
 		{
 
-			add_menu_page( __( 'Title of the page', 'mxmlb-domain' ), __( 'Mx Like Button', 'mxmlb-domain' ), 'manage_options', 'mxmlb-mx-like-button-menu', array( $this, 'admin_index' ), 'dashicons-image-filter', 111 ); // icons https://developer.wordpress.org/resource/dashicons/#id
+			add_menu_page( __( 'Title of the page', 'mxmlb-domain' ), __( 'Mx Like Button', 'mxmlb-domain' ), 'manage_options', 'mxmlb-mx-like-button-menu', array( $this, 'admin_index' ), MXMLB_PLUGIN_URL . '/assets/img/icon.png', 111 ); // icons https://developer.wordpress.org/resource/dashicons/#id
 
 			// add submenu
 			// add_submenu_page( 'mxmlb-mx-like-button-menu', __( 'Submenu title', 'mxmlb-domain' ), __( 'Submenu item', 'mxmlb-domain' ), 'manage_options', 'mxmlb-mx-like-button-submenu', array( $this, 'page_distributor' ) );

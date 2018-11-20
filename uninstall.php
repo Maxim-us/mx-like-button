@@ -8,7 +8,9 @@ global $wpdb;
 // table name
 $table_names = array();
 
-$table_names[] = $wpdb->prefix . 'mxmlb_table_slug';
+$table_names[] = $wpdb->prefix . 'mx_like_options';
+
+$table_names[] = $wpdb->prefix . 'mx_like_store';
 
 // drop table(s);
 foreach( $table_names as $table_name ){
@@ -18,14 +20,3 @@ foreach( $table_names as $table_name ){
     $wpdb->query( $sql );
 
 }
-
-// Delete posts CPT
-$posts = get_posts( array( 'post_type' => 'mxmlb_book', 'numberposts' => -1 ) );
-
-foreach( $posts as $post ){
-
-	wp_delete_post( $post->ID, true );
-
-}
-
-//delete_option( 'some_option' );
