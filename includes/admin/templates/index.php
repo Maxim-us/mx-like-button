@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 <h2><?php echo __( 'You can change the images below.', 'mxmlb-domain' ); ?></h2>
 
+<p><i><?php echo __( 'Recommended image size 50x50 px. and picture formats - .png', 'mxmlb-domain' ); ?></i></p>
+
 <?php 
 
 // display blocks for downloading new images

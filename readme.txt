@@ -1,7 +1,7 @@
 === MX Like Button ===
 Contributors: markomaksym
 Tags: buddypress, activity, facebook like button, fb like, fb like button, like, like button
-Requires at least: 4.3
+Requires at least: 4.7
 Tested up to: 4.9
 Stable tag: 1.0
 License: GPLv2 or later
@@ -11,7 +11,20 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Your users will be able to express emotions at a particular post in the stream of activity. This plugin is similar to the Facebook "Like system" but very simplified.
+<p>
+	Your users will be able to express emotions at a particular post in the stream of activity. This plugin is similar to the <b>Facebook "Like system"</b> but very simplified. <br>
+	You can also change the images of each button.
+</p>
+
+<p>
+	<b>Features:</b><br>
+	<ul>
+		<li>Create like button for activity stream on the BuddyPress site</li>
+		<li>6 different emotions</li>
+		<li>Count each emotion</li>
+		<li>There is a possibility to change pictures</li>		
+	</ul>
+</p>
 
 == Installation ==
 
@@ -29,9 +42,8 @@ Your users will be able to express emotions at a particular post in the stream o
 
 == Screenshots ==
 
-1. Click the button
-2. Item moved upwards
-3. Click the button again
+1. Appearance of the MX Like Button on the site.
+2. Administration panel of the MX Like Button
 
 == Changelog ==
 

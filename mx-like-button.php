@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: MX Like Button
-Plugin URI: https://github.com/Maxim-us/wp-plugin-skeleton
+Plugin URI: https://github.com/Maxim-us/mx-like-button
 Description: Brief description
 Author: Marko Maksym
 Version: 1.0
