@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 ?>
 
-<div class="mx-like-box" id="mx-like-button-<?php bp_activity_id(); ?>">	
+<div class="mx-like-box" id="mx-like-button-<?php bp_activity_id(); ?>" data-post-type="bp">	
 
 	<div class="mx-like-place">
 

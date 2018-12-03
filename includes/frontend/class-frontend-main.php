@@ -70,8 +70,8 @@ class MXMLBFrontEndMain
 
 		}
 
-	/*
-	* Hooks. Creation like button
+	/**********************************************
+	* Hooks. Creation like button into activity stream
 	*/
 	public function mxmlb_show_like_button_hooks()
 	{
@@ -170,6 +170,26 @@ class MXMLBFrontEndMain
 
 	<?php }
 
+	/**********************************************
+	* Hooks. Creation like button into post
+	*/
+	public function mxmlb_show_like_button_hooks_into_post()
+	{
+
+		add_filter( 'the_content', array( $this, 'mxmlb_show_like_button_into_post' ) );
+
+	}
+
+		public function mxmlb_show_like_button_into_post( $content )
+		{
+			
+			$content .= mxmlb_display_mx_like_button_template();
+
+			return $content;
+
+		}
+		
+
 }
 
 // Initialize
@@ -178,6 +198,8 @@ $initialize_class = new MXMLBFrontEndMain();
 // Apply scripts and styles
 $initialize_class->mxmlb_register();
 
-// show like button
+// show like button into activity
 $initialize_class->mxmlb_show_like_button_hooks();
 
+// show like button into post
+$initialize_class->mxmlb_show_like_button_hooks_into_post();

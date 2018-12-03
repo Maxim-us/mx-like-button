@@ -81,7 +81,7 @@ class MXMLBDataBaseTalkFrontend
 
 			// check user choise
 			$user_ids = array(
-				$object_likes['user_ids']['id'] => array( 'typeOfLike' => $object_likes['user_ids']['typeOfLike'] )
+				$object_likes['user_ids']['id'] => array( 'typeOfLike' => $object_likes['user_ids']['typeOfLike'], 'postType' => $object_likes['user_ids']['postType'] )
 			);			
 
 			$user_ids = serialize( $user_ids );
@@ -131,6 +131,8 @@ class MXMLBDataBaseTalkFrontend
 
 					// function of update user choise
 					$array_of_user_ids[$key]['typeOfLike'] = $object_likes['user_ids']['typeOfLike'];
+
+					$array_of_user_ids[$key]['postType'] = $object_likes['user_ids']['postType'];
 
 					$key_user_not_exists = true;
 

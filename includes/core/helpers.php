@@ -65,3 +65,60 @@ function mxmlb_like_options( $option_name ) {
 	return $option_value;
 
 }
+
+/*
+* Display mx_like_button for posts
+*/
+function mxmlb_display_mx_like_button_template() {
+
+	$post_type = get_post_type( get_the_ID() );
+
+	$html = '<div class="mx-like-box" id="mx-like-button-' . get_the_ID() . '"  data-post-type="' . $post_type . '">';
+
+	$html .= '<div class="mx-like-place">';
+
+		$html .= '<div class="mx-like-place-faces">';
+
+			$html .= '<span class="mx-like" title="0">like</span>';
+			$html .= '<span class="mx-heart" title="0">heart</span>';
+			$html .= '<span class="mx-laughter" title="0">laughter</span>';
+			$html .= '<span class="mx-wow" title="0">wow</span>';
+			$html .= '<span class="mx-sad" title="0">sad</span>';
+			$html .= '<span class="mx-angry" title="0">angry</span>';
+		
+		$html .= '</div>';
+		
+		$html .= '<div class="mx-like-place-count mx-display-none">0</div>';
+
+	$html .= '</div>';
+
+	$html .= '<button class="mx-like-main-button" data-like-type="like">';
+		$html .= '<span>like</span>';
+	$html .= '</button>';
+
+	$html .= '<div class="mx-like-other-faces">';
+		$html .= '<button class="mx-like-face-like" data-like-type="like">';
+			$html .= '<span>like</span>';
+		$html .= '</button>';
+		$html .= '<button class="mx-like-face-heart" data-like-type="heart">';
+			$html .= '<span>heart</span>';
+		$html .= '</button>';
+		$html .= '<button class="mx-like-face-laughter" data-like-type="laughter">';		
+			$html .= '<span>laughter</span>';
+		$html .= '</button>';
+		$html .= '<button class="mx-like-face-wow" data-like-type="wow">';
+			$html .= '<span>wow</span>';
+		$html .= '</button>';
+		$html .= '<button class="mx-like-face-sad" data-like-type="sad">';
+			$html .= '<span>sad</span>';
+		$html .= '</button>';
+		$html .= '<button class="mx-like-face-angry" data-like-type="angry">';
+			$html .= '<span>angry</span>';
+		$html .= '</button>';
+	$html .= '</div>';
+
+	$html .= '</div>';
+
+	return $html;
+
+}

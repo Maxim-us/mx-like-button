@@ -26,6 +26,12 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 	</ul>
 </p>
 
+<p>
+	<b>How does it work?</b>
+</p>
+
+<iframe width="600" height="320" src="https://www.youtube.com/embed/71SYy3L1fNI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 == Installation ==
 
 = From your WordPress dashboard =
