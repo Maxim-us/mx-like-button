@@ -11,12 +11,14 @@
 		if( mxmlb_localize.mxmlb_object_likes === '0' ) {
 
 			mxmlb_localize.mxmlb_object_likes = {
-				0: {
-					0: {
-						'typeOfLike': 'like'
+				'bp' : { //post type
+					0: { // post id
+							0: { // user id
+								'typeOfLike': 'like' // type of like
+							}
+						}
 					}
-				}
-			};
+				}				
 
 		}
 
@@ -65,32 +67,8 @@
 
 				mxmlb_load_more_activity( $, '.activity-list', function() {
 
-					$.each( mxmlb_localize.mxmlb_object_likes, function( key, value ) {
-
-						if( $( '#' + 'mx-like-button-' + key ).length ) {
-
-							if( !$( '#' + 'mx-like-button-' + key ).hasClass( 'mx-it-notice' ) ) {
-
-								// set count
-								var countOfLikes = Object.keys( mxmlb_localize.mxmlb_object_likes[key] ).length
-
-								// count of likes
-								mxmlb_set_count_of_likes( $, key, countOfLikes );
-
-								// count per like
-								mxmlb_count_of_likes_per_like( $, key );
-
-								// show according faces
-								mxmlb_show_like_faces( $, key );
-
-								// to notice the post
-								mxmlb_notice_the_post( $, key );
-
-							}
-
-						}
-
-					} );
+					// RUN MX LIKE BUTTON
+					mxmlb_run_mx_like_button( $ );
 
 				} );
 
@@ -98,32 +76,8 @@
 
 				mxmlb_wait_for_Element( $, '.activity-list', function() {
 				
-					$.each( mxmlb_localize.mxmlb_object_likes, function( key, value ) {
-
-						if( $( '#' + 'mx-like-button-' + key ).length ) {
-
-							if( !$( '#' + 'mx-like-button-' + key ).hasClass( 'mx-it-notice' ) ) {
-						
-								// set count
-								var countOfLikes = Object.keys( mxmlb_localize.mxmlb_object_likes[key] ).length
-
-								// count of likes
-								mxmlb_set_count_of_likes( $, key, countOfLikes );
-
-								// count per like
-								mxmlb_count_of_likes_per_like( $, key );
-
-								// show according faces
-								mxmlb_show_like_faces( $, key );
-
-								// to notice the post
-								mxmlb_notice_the_post( $, key );
-
-							}	
-
-						}
-
-					} );
+					// RUN MX LIKE BUTTON
+					mxmlb_run_mx_like_button( $ );
 
 				} );
 
@@ -136,32 +90,8 @@
 
 				if( !$( '.activity-list' ).length ) {
 
-					$.each( mxmlb_localize.mxmlb_object_likes, function( key, value ) {
-
-						if( $( '#' + 'mx-like-button-' + key ).length ) {
-
-							if( !$( '#' + 'mx-like-button-' + key ).hasClass( 'mx-it-notice' ) ) {
-						
-								// set count
-								var countOfLikes = Object.keys( mxmlb_localize.mxmlb_object_likes[key] ).length
-
-								// count of likes
-								mxmlb_set_count_of_likes( $, key, countOfLikes );
-
-								// count per like
-								mxmlb_count_of_likes_per_like( $, key );
-
-								// show according faces
-								mxmlb_show_like_faces( $, key );
-
-								// to notice the post
-								mxmlb_notice_the_post( $, key );
-
-							}	
-
-						}
-
-					} );
+					// RUN MX LIKE BUTTON
+					mxmlb_run_mx_like_button( $ );
 
 				}
 
@@ -172,32 +102,8 @@
 
 				mxmlb_load_more_activity( $, '.activity-list', function() {
 
-					$.each( mxmlb_localize.mxmlb_object_likes, function( key, value ) {
-
-						if( $( '#' + 'mx-like-button-' + key ).length ) {
-
-							if( !$( '#' + 'mx-like-button-' + key ).hasClass( 'mx-it-notice' ) ) {
-
-								// set count
-								var countOfLikes = Object.keys( mxmlb_localize.mxmlb_object_likes[key] ).length
-
-								// count of likes
-								mxmlb_set_count_of_likes( $, key, countOfLikes );
-
-								// count per like
-								mxmlb_count_of_likes_per_like( $, key );
-
-								// show according faces
-								mxmlb_show_like_faces( $, key );
-
-								// to notice the post
-								mxmlb_notice_the_post( $, key );
-
-							}
-
-						}
-
-					} );
+					// RUN MX LIKE BUTTON
+					mxmlb_run_mx_like_button( $ );
 
 				} );
 
@@ -230,160 +136,218 @@
 				/*
 				* check like|dislike
 				*/
-				var newPostId = 0;
 
-				$.when( 
+				// check if current post type exists in object
+				if( mxmlb_post_type_exists_in_object( getPostType ) ) {				
 
-					// check new post id
-					$.each( mxmlb_localize.mxmlb_object_likes, function( key, value ) {
+					// each post types ...
+	 /*start loop*/ $.each( mxmlb_localize.mxmlb_object_likes, function( _postType, _postIds ) {
 
-						var _postId = parseInt( key );
+						if( getPostType === _postType ) {
 
-						// find post id
-						if( _postId === postId ) {
+							var newPostId = 0;
 
-							newPostId = _postId;
+							$.when( 
+
+								// check new post id
+								$.each( _postIds, function( key, value ) {
+
+									var _postId = parseInt( key );
+
+									// find post id
+									if( _postId === postId ) {
+
+										newPostId = _postId;
+
+									}
+									
+								} )
+
+							).then( function() {
+
+							 	// if need 'CREATE' new like obj
+							 	if( newPostId === 0 ) {
+
+							 		// save like data in object
+							 		mxmlb_localize.mxmlb_object_likes[getPostType][postId] = {};
+									mxmlb_localize.mxmlb_object_likes[getPostType][postId][userId] = objLike;
+
+									// save data
+									var data = {
+
+										'action': 'mxmlb_mounting_like_obj',
+										'nonce': mxmlb_localize.mxmlb_nonce,
+										'mxmlb_object_likes': {
+											'post_id' 	: postId,
+											'postType' 		: getPostType,
+											'user_ids'	: {
+												'id' 			: userId,
+												'typeOfLike' 	: objLike.typeOfLike
+											}
+										}
+
+									};
+
+									mxmlb_talkig_data( data );
+
+								// if need 'UPDATE' new like obj
+							 	} else {
+
+									// save type of like if user id not exists
+									if( mxmlb_localize.mxmlb_object_likes[getPostType][newPostId][userId] === undefined ) {
+
+										mxmlb_localize.mxmlb_object_likes[getPostType][newPostId][userId] = objLike;
+
+										// save data datastore
+										var data = {
+
+											'action': 'mxmlb_mounting_like_obj',
+											'nonce': mxmlb_localize.mxmlb_nonce,
+											'mxmlb_object_likes': {
+												'post_id' 	: newPostId,
+												'postType' 		: getPostType,
+												'user_ids'	: {
+													'id' 			: userId,
+													'typeOfLike' 	: objLike.typeOfLike
+												}
+											}
+
+										};
+
+										mxmlb_talkig_data( data );
+
+										// show face
+										mxmlb_show_like_faces( $, getPostType, newPostId );
+									
+									// update type of like if user id exists
+									} else{
+
+										// cancel like if user click main button again						
+										if( $( mxmlb_find_click_like_button( e ) ).hasClass( 'mx-like-main-button' ) ) {
+
+											delete mxmlb_localize.mxmlb_object_likes[getPostType][newPostId][userId];
+
+											// delete from database
+											var data = {
+
+												'action': 'mxmlb_delete_like_obj',
+												'nonce': mxmlb_localize.mxmlb_nonce,
+												'mxmlb_object_likes': {
+													'post_id' 	: newPostId,
+													'postType' 		: getPostType,
+													'user_ids'	: {
+														'id' 			: userId,
+														'typeOfLike' 	: 'del'
+													}
+												}
+
+											};
+
+											mxmlb_talkig_data( data );
+
+											// console.log( 'delete' );
+
+										// or update like object
+										} else {
+
+											mxmlb_localize.mxmlb_object_likes[getPostType][newPostId][userId] = objLike;
+
+
+											// update database
+											var data = {
+
+												'action': 'mxmlb_mounting_like_obj',
+												'nonce': mxmlb_localize.mxmlb_nonce,
+												'mxmlb_object_likes': {
+													'post_id' 	: newPostId,
+													'postType' 		: getPostType,
+													'user_ids'	: {
+														'id' 			: userId,
+														'typeOfLike' 	: objLike.typeOfLike
+													}
+												}
+
+											};
+
+											mxmlb_talkig_data( data );
+
+											// show face
+											mxmlb_show_like_faces( $, getPostType, newPostId );
+
+										}
+
+									}					
+
+							 	}			 	
+								
+								/*
+								* get object for particular post and set count, type of likes
+								*/
+								var countObjects = Object.keys( _postIds[postId] ).length;
+
+								// count function
+								mxmlb_set_count_of_likes( $, postId, countObjects );
+
+								// count per like
+								mxmlb_count_of_likes_per_like( $, getPostType, postId );
+
+								// show faces function
+								mxmlb_show_like_faces( $, getPostType, postId );
+
+								/*
+								* get the list of like types 
+								*/
+								// console.log( mxmlb_localize.mxmlb_object_likes );
+
+							} );
 
 						}
-						
-					} )
 
-				 ).then( function() {
+						// console.log( mxmlb_localize.mxmlb_object_likes );
 
-				 	// if need 'CREATE' new like obj
-				 	if( newPostId === 0 ) {
+					} ); /*end loop*/
+					// ... each post types
 
-				 		// save like data in object
-				 		mxmlb_localize.mxmlb_object_likes[postId] = {};
-						mxmlb_localize.mxmlb_object_likes[postId][userId] = objLike;
+				} else {
 
-						// save data
-						var data = {
+					// add new post type
+					mxmlb_localize.mxmlb_object_likes[getPostType] = {};
+					mxmlb_localize.mxmlb_object_likes[getPostType][postId] = {};
+					mxmlb_localize.mxmlb_object_likes[getPostType][postId][userId] = objLike;
 
-							'action': 'mxmlb_mounting_like_obj',
-							'nonce': mxmlb_localize.mxmlb_nonce,
-							'mxmlb_object_likes': {
-								'post_id' 	: postId,
-								'user_ids'	: {
-									'id' 			: userId,
-									'typeOfLike' 	: objLike.typeOfLike,
-									'postType' 		: getPostType
-								}
+					// save data
+					var data = {
+
+						'action': 'mxmlb_mounting_like_obj',
+						'nonce': mxmlb_localize.mxmlb_nonce,
+						'mxmlb_object_likes': {
+							'post_id' 	: postId,
+							'postType' 		: getPostType,
+							'user_ids'	: {
+								'id' 			: userId,
+								'typeOfLike' 	: objLike.typeOfLike
 							}
+						}
 
-						};
+					};
 
-						mxmlb_talkig_data( data );
+					mxmlb_talkig_data( data );
 
-					// if need 'UPDATE' new like obj
-				 	} else {
-
-						// save type of like if user id not exists
-						if( mxmlb_localize.mxmlb_object_likes[newPostId][userId] === undefined ) {
-
-							mxmlb_localize.mxmlb_object_likes[newPostId][userId] = objLike;
-
-							// save data datastore
-							var data = {
-
-								'action': 'mxmlb_mounting_like_obj',
-								'nonce': mxmlb_localize.mxmlb_nonce,
-								'mxmlb_object_likes': {
-									'post_id' 	: newPostId,
-									'user_ids'	: {
-										'id' 			: userId,
-										'typeOfLike' 	: objLike.typeOfLike,
-										'postType' 		: getPostType
-									}
-								}
-
-							};
-
-							mxmlb_talkig_data( data );
-
-							// show face
-							mxmlb_show_like_faces( $, newPostId );
-						
-						// update type of like if user id exists
-						} else{
-
-							// cancel like if user click main button again						
-							if( $( mxmlb_find_click_like_button( e ) ).hasClass( 'mx-like-main-button' ) ) {
-
-								delete mxmlb_localize.mxmlb_object_likes[newPostId][userId];
-
-								// delete from database
-								var data = {
-
-									'action': 'mxmlb_delete_like_obj',
-									'nonce': mxmlb_localize.mxmlb_nonce,
-									'mxmlb_object_likes': {
-										'post_id' 	: newPostId,
-										'user_ids'	: {
-											'id' 			: userId,
-											'typeOfLike' 	: 'del'
-										}
-									}
-
-								};
-
-								mxmlb_talkig_data( data );
-
-								// console.log( 'delete' );
-
-							// or update like object
-							} else {
-
-								mxmlb_localize.mxmlb_object_likes[newPostId][userId] = objLike;
-
-
-								// update database
-								var data = {
-
-									'action': 'mxmlb_mounting_like_obj',
-									'nonce': mxmlb_localize.mxmlb_nonce,
-									'mxmlb_object_likes': {
-										'post_id' 	: newPostId,
-										'user_ids'	: {
-											'id' 			: userId,
-											'typeOfLike' 	: objLike.typeOfLike,
-											'postType' 		: getPostType
-										}
-									}
-
-								};
-
-								mxmlb_talkig_data( data );
-
-								// show face
-								mxmlb_show_like_faces( $, newPostId );
-
-							}
-
-						}					
-
-				 	}			 	
-					
 					/*
 					* get object for particular post and set count, type of likes
 					*/
-					var countObjects = Object.keys( mxmlb_localize.mxmlb_object_likes[postId] ).length;
+					var countObjects = 1;
 
 					// count function
 					mxmlb_set_count_of_likes( $, postId, countObjects );
 
 					// count per like
-					mxmlb_count_of_likes_per_like( $, postId );
+					mxmlb_count_of_likes_per_like( $, getPostType, postId );
 
 					// show faces function
-					mxmlb_show_like_faces( $, postId );
+					mxmlb_show_like_faces( $, getPostType, postId );
 
-					/*
-					* get the list of like types 
-					*/
-					// console.log( mxmlb_localize.mxmlb_object_likes );
-
-				} );
+				}
 
 			}
 
@@ -457,7 +421,7 @@
 	}
 
 	// set count of likes per like
-	function mxmlb_count_of_likes_per_like( $, postId ) {
+	function mxmlb_count_of_likes_per_like( $, postType, postId ) {
 
 		var like_obj = {
 			like: 		0,
@@ -470,7 +434,7 @@
 
 		$.when(
 
-			$.each( mxmlb_localize.mxmlb_object_likes[postId], function( key, value ) {
+			$.each( mxmlb_localize.mxmlb_object_likes[postType][postId], function( key, value ) {
 
 				var count_likes = parseInt( like_obj[value.typeOfLike] );
 
@@ -491,13 +455,13 @@
 	}
 
 	// show like faces
-	function mxmlb_show_like_faces( $, postId ) {
+	function mxmlb_show_like_faces( $, postType, postId ) {
 
 		// clear the face table
 		$( '#' + 'mx-like-button-' + postId + ' .mx-like-place-faces' )
 		.find( 'span' ).removeClass( 'mx-like-active' );
 
-		$.each( mxmlb_localize.mxmlb_object_likes[postId], function( key, value ) {
+		$.each( mxmlb_localize.mxmlb_object_likes[postType][postId], function( key, value ) {
 
 			$( '#' + 'mx-like-button-' + postId + ' .mx-like-place-faces' )
 			.find( '.mx-' + value.typeOfLike ).addClass( 'mx-like-active' );
@@ -507,9 +471,9 @@
 	}
 
 	// to notice the post
-	function mxmlb_notice_the_post( $, postId ) {
+	function mxmlb_notice_the_post( $, postType, postId ) {
 
-		$.each( mxmlb_localize.mxmlb_object_likes[postId], function( key, value ) {
+		$.each( mxmlb_localize.mxmlb_object_likes[postType][postId], function( key, value ) {
 
 			$( '#' + 'mx-like-button-' + postId ).addClass( 'mx-it-notice' );
 
@@ -584,9 +548,60 @@
 
 		jQuery.post( mxmlb_localize.ajaxurl, data, function( response ) {
 
-			// console.log( response );
+			console.log( response );
 
 		} );
+
+	}
+
+	/*
+	* Document ready or Uploading a page 
+	*/
+	function mxmlb_run_mx_like_button( $ ) {
+
+		$.each( mxmlb_localize.mxmlb_object_likes, function( _postType, _postIds ) {
+
+			$.each( _postIds, function( _postId, _objUsers ) {
+
+				if( $( '#' + 'mx-like-button-' + _postId ).length ) {
+
+					if( !$( '#' + 'mx-like-button-' + _postId ).hasClass( 'mx-it-notice' ) ) {
+
+						if( $( '#' + 'mx-like-button-' + _postId ).attr( 'data-post-type' ) === _postType ) {
+
+							// set count
+							var countOfLikes = Object.keys( mxmlb_localize.mxmlb_object_likes[_postType][_postId] ).length
+
+							// count of likes
+							mxmlb_set_count_of_likes( $, _postId, countOfLikes );
+
+							// count per like
+							mxmlb_count_of_likes_per_like( $, _postType, _postId );
+
+							// show according faces
+							mxmlb_show_like_faces( $, _postType, _postId );
+
+							// to notice the post
+							mxmlb_notice_the_post( $, _postType, _postId );
+
+						}
+
+					}
+
+				}
+
+			} );
+
+		} );
+
+	}
+
+	/*
+	* If post type exists
+	*/
+	function mxmlb_post_type_exists_in_object( getPostType ) {
+
+		return mxmlb_localize.mxmlb_object_likes.hasOwnProperty( getPostType );
 
 	}
 

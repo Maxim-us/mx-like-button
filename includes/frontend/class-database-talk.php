@@ -49,8 +49,10 @@ class MXMLBDataBaseTalkFrontend
 
 			$post_id = intval( $_POST['mxmlb_object_likes']['post_id'] );
 
+			$post_type = $_POST['mxmlb_object_likes']['postType'];
+
 			// if post id is exists
-			$post_count = count( mxmlb_select_data_likes_by_post_id( $post_id ) );
+			$post_count = count( mxmlb_select_data_likes_by_post_id( $post_id, $post_type ) );			
 
 			if( $post_count == 0 ) {
 
@@ -60,7 +62,7 @@ class MXMLBDataBaseTalkFrontend
 			} else {
 
 				// Update data
-				$this->update_like_obj( $_POST['mxmlb_object_likes'], $post_id );	
+				$this->update_like_obj( $_POST['mxmlb_object_likes'], $post_type, $post_id );	
 
 			}
 
@@ -81,10 +83,13 @@ class MXMLBDataBaseTalkFrontend
 
 			// check user choise
 			$user_ids = array(
-				$object_likes['user_ids']['id'] => array( 'typeOfLike' => $object_likes['user_ids']['typeOfLike'], 'postType' => $object_likes['user_ids']['postType'] )
+				$object_likes['user_ids']['id'] => array( 'typeOfLike' => $object_likes['user_ids']['typeOfLike'] )
 			);			
 
 			$user_ids = serialize( $user_ids );
+
+			// post type
+			$post_type = $object_likes['postType'];
 
 			// insert
 			$wpdb->insert(
@@ -92,10 +97,12 @@ class MXMLBDataBaseTalkFrontend
 				$table_name, 
 				array(
 					'post_id' 	=> $object_likes['post_id'],
-					'user_ids' 	=> $user_ids
+					'user_ids' 	=> $user_ids,
+					'post_type' => $post_type
 				),
 				array(
 					'%d',
+					'%s',
 					'%s'
 				)
 
@@ -104,7 +111,7 @@ class MXMLBDataBaseTalkFrontend
 		}
 
 		// update data
-		public function update_like_obj( $object_likes, $post_id )
+		public function update_like_obj( $object_likes, $post_type, $post_id )
 		{
 
 			// db query
@@ -113,7 +120,18 @@ class MXMLBDataBaseTalkFrontend
 			$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
 
 			// select data
-			$user_ids_row = $wpdb->get_row( "SELECT user_ids FROM $table_name WHERE post_id = $post_id"  );
+			$user_ids_row = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT id, user_ids, post_type
+					FROM $table_name
+					WHERE post_id = %d
+					AND post_type = %s",
+					$post_id, $post_type
+				)
+			);
+
+			// row id
+			$row_id = $user_ids_row->id;
 
 			// get current user
 			$get_current_user_id = intval( $object_likes['user_ids']['id'] );
@@ -131,8 +149,6 @@ class MXMLBDataBaseTalkFrontend
 
 					// function of update user choise
 					$array_of_user_ids[$key]['typeOfLike'] = $object_likes['user_ids']['typeOfLike'];
-
-					$array_of_user_ids[$key]['postType'] = $object_likes['user_ids']['postType'];
 
 					$key_user_not_exists = true;
 
@@ -154,13 +170,16 @@ class MXMLBDataBaseTalkFrontend
 			// serialize data
 			$user_ids = serialize( $array_of_user_ids );
 
+			// post type
+			$post_type = $object_likes['postType'];
+
 			// update data
 			$wpdb->update( 
 				$table_name, 
 				array( 
 					'user_ids' 	=> $user_ids
 				), 
-				array( 'post_id' => $post_id ),
+				array( 'id' => $row_id ),
 				array( 
 					'%s'
 				) 
@@ -178,7 +197,7 @@ class MXMLBDataBaseTalkFrontend
 		if( empty( $_POST['nonce'] ) ) wp_die( '0' );
 
 		// Checked or nonce match
-		if( wp_verify_nonce( $_POST['nonce'], 'mxmlb_nonce_request' ) ) {
+		if( wp_verify_nonce( $_POST['nonce'], 'mxmlb_nonce_request' ) ) {			
 			
 			$this->delete_like_obj( $_POST );
 
@@ -193,6 +212,9 @@ class MXMLBDataBaseTalkFrontend
 			// post id
 			$post_id = $_post_['mxmlb_object_likes']['post_id'];
 
+			// post type
+			$post_type = $_POST['mxmlb_object_likes']['postType'];
+
 			// user id
 			$user_id = intval( $_post_['mxmlb_object_likes']['user_ids']['id'] );
 
@@ -202,7 +224,20 @@ class MXMLBDataBaseTalkFrontend
 			$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
 
 			// select data
-			$user_ids_row = $wpdb->get_row( "SELECT user_ids FROM $table_name WHERE post_id = $post_id"  );
+			$user_ids_row = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT id, user_ids, post_type
+					FROM $table_name
+					WHERE post_id = %d
+					AND post_type = %s",
+					$post_id, $post_type
+				)
+			);
+
+			var_dump($user_ids_row);
+
+			// row id
+			$row_id = $user_ids_row->id;
 
 			// get current user
 			$get_current_user_id = intval( $_post_['mxmlb_object_likes']['user_ids']['id'] );			
@@ -223,18 +258,18 @@ class MXMLBDataBaseTalkFrontend
 
 					// delete row from database
 					$wpdb->delete( $table_name,
-						array( 'post_id' => $post_id )
+						array( 'id' => $row_id )
 					);
 
-				} else {					
+				} else {
 
-					// update like obj
+					// update data
 					$wpdb->update( 
 						$table_name, 
 						array( 
 							'user_ids' 	=> $user_ids
 						), 
-						array( 'post_id' => $post_id ),
+						array( 'id' => $row_id ),
 						array( 
 							'%s'
 						) 

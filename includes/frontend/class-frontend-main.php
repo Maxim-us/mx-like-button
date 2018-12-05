@@ -19,7 +19,7 @@ class MXMLBFrontEndMain
 		$this->mxmlb_include();
 
 		// test
-		// add_action( 'wp_footer', array( $this, 'mxmlb_get_data_of_likes' ) );
+		add_action( 'wp_footer', array( $this, 'mxmlb_get_data_of_likes' ) );
 
 	}
 
@@ -93,21 +93,29 @@ class MXMLBFrontEndMain
 	public function mxmlb_get_data_of_likes()
 	{
 
-		$array_likes_data = 0;
+		$array_likes_data = 0;		
 
 		if( count( mxmlb_select_data_likes() ) >= 1 ) {
-
+			
 			// main array
 			$array_likes_data = array();
+
+			// set post types
+			$array_likes_data = $this->set_existing_post_types( mxmlb_select_data_likes() );
 
 			// each array
 			foreach ( mxmlb_select_data_likes() as $key => $value ) {
 
+				$array_likes_data[$value->post_type][$value->post_id] = array();
+
 				// 
-				$array_likes_data[$value->post_id] = array();			
+				// $array_likes_data[$value->post_id] = array();
+
+				// users array
+				$array_likes_data[$value->post_type][$value->post_id] = array();
 
 				// user ids data
-				$user_ids = maybe_unserialize( $value->user_ids );				
+				$user_ids = maybe_unserialize( $value->user_ids );	
 
 				// push user to array
 				foreach ( $user_ids as $_key => $_value ) {
@@ -116,13 +124,13 @@ class MXMLBFrontEndMain
 
 						$_key => array(
 
-							'typeOfLike' => $_value['typeOfLike']
+							'typeOfLike' 	=> $_value['typeOfLike']
 
 						)
 
 					);
 
-					$array_likes_data[$value->post_id] = $array_likes_data[$value->post_id] + $new_user_like;
+					$array_likes_data[$value->post_type][$value->post_id] = $array_likes_data[$value->post_type][$value->post_id] + $new_user_like;
 
 				}
 			
@@ -133,6 +141,22 @@ class MXMLBFrontEndMain
 		// var_dump( $array_likes_data );
 
 		return $array_likes_data;
+	}
+
+	// set post types
+	public function set_existing_post_types( $arr )
+	{
+
+		$array_of_post_types = array();
+
+		foreach ( $arr as $key => $value ) {			
+
+			$array_of_post_types[$value->post_type] = array();
+
+		}
+
+		return $array_of_post_types;
+
 	}
 
 	// change image of buttons

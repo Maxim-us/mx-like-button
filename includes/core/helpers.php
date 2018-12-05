@@ -30,7 +30,7 @@ function mxmlb_select_data_likes() {
 
 	$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
 
-	$get_data_likes = $wpdb->get_results( "SELECT id, post_id, user_ids FROM $table_name ORDER BY id ASC" );
+	$get_data_likes = $wpdb->get_results( "SELECT id, post_id, user_ids, post_type FROM $table_name ORDER BY id ASC" );
 
 	return $get_data_likes;
 
@@ -39,13 +39,23 @@ function mxmlb_select_data_likes() {
 /*
 * Select data likes by post id
 */
-function mxmlb_select_data_likes_by_post_id( $post_id ) {
+function mxmlb_select_data_likes_by_post_id( $post_id, $post_type ) {
 
 	global $wpdb;
 
 	$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
 
-	$get_data_likes = $wpdb->get_row( "SELECT user_ids FROM $table_name WHERE post_id = $post_id"  );
+	$get_data_likes = $wpdb->get_var( 
+		$wpdb->prepare(
+			"SELECT user_ids
+			FROM $table_name
+			WHERE post_id = %d
+			AND post_type = %s",
+			$post_id, $post_type
+		)
+	);
+
+	// $get_data_likes = $wpdb->get_row( "SELECT user_ids FROM $table_name WHERE post_id = $post_id AND post_type = $post_type"  );
 
 	return $get_data_likes;
 
