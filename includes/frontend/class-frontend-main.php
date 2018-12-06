@@ -83,7 +83,18 @@ class MXMLBFrontEndMain
 		public function mxmlb_show_like_button_activity()
 		{
 
-			mxmlb_include_template_frontend( 'mx-like-box.php' );
+			// like options
+			$row_options = mxmlb_get_like_option_by_name( '_turn_of_for_post_types' );
+
+			$array_of_post_types_optyons = maybe_unserialize( $row_options->mx_like_option_value );
+
+			$post_type = 'bp';
+
+			if( !in_array( $post_type, $array_of_post_types_optyons ) ) {
+
+				mxmlb_include_template_frontend( 'mx-like-box.php' );
+
+			}
 
 		}
 
@@ -163,7 +174,7 @@ class MXMLBFrontEndMain
 	public function mxmlb_change_like_button_images()
 	{
 
-		$upload_images_serialize = mxmlb_like_options( '_upload_images' )->mx_like_option_value;
+		$upload_images_serialize = mxmlb_get_like_option_by_name( '_upload_images' )->mx_like_option_value;
 
 		$images_array = maybe_unserialize( $upload_images_serialize ); ?>
 

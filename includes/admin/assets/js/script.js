@@ -47,6 +47,27 @@ jQuery( document ).ready( function( $ ){
 
 	} );
 
+	/*
+	* Post types area
+	*/
+	$( '#mxmlb_post_type_form' ).on( 'change', '.mx_post_type_checkbox', function() {
+
+		$( this ).parent().toggleClass( 'mxmlb_post_type_turn_of' );
+
+		var postType = $( this ).attr( 'data-post-type' );
+
+		var data = {
+			'action'		: 'mxmlb_update_post_type_from_database',
+			'nonce'			: mxmlb_admin_localize.mxmlb_admin_nonce,
+			'post_type' 	: postType
+		};
+
+		mxmlb_update_post_type_options( data );
+
+		console.log( postType );
+
+	} );
+
 } );
 
 // upload new image
@@ -105,5 +126,16 @@ function mxmlb_success_removing_img( form, default_image ) {
 	form.parent().find( '.mx-like-preview' ).attr( 'src', default_image );
 
 	form.hide();
+
+}
+
+// update post type options
+function mxmlb_update_post_type_options( data ) {
+
+	jQuery.post( mxmlb_admin_localize.ajaxurl, data, function( response ) {
+
+		// console.log( response );
+
+	} );
 
 }

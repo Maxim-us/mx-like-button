@@ -548,7 +548,7 @@
 
 		jQuery.post( mxmlb_localize.ajaxurl, data, function( response ) {
 
-			console.log( response );
+			// console.log( response );
 
 		} );
 

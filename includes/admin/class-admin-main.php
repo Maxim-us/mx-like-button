@@ -80,38 +80,26 @@ class MXMLBAdminMain
 
 			public function admin_index()
 			{
-				
-				// require index page
-				mxmlb_require_template_admin( 'index.php' );
+
+				// 	// require main menu
+				mxmlb_require_template_admin( 'main_module_menu.php' );
+
+				switch( $_GET['p'] ) {
+
+					case 'change_buttons' :
+						$action = 'change_buttons.php';
+						break;
+
+					default :
+						$action = 'index.php';
+						break;
+
+				}
+
+				// require pages
+				mxmlb_require_template_admin( $action );
 
 			}
-
-			// public function page_distributor()
-			// {
-
-			// 	// require main menu
-			// 	mxmlb_require_template_admin( 'main_module_menu.php' );
-
-			// 	switch( $_GET['p'] ){
-
-			// 		case 'page1' :
-			// 			$action = 'page1.php';
-			// 			break;
-
-			// 		case 'page2' :
-			// 			$action = 'page2.php';
-			// 			break;
-
-			// 		default :
-			// 			$action = 'index.php';
-			// 			break;
-
-			// 	}
-
-			// 	// require pages
-			// 	mxmlb_require_template_admin( $action );
-
-			// }
 
 		// add settings link
 		public function settings_link( $links )

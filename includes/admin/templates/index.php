@@ -3,53 +3,68 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-?>
+$post_types = get_post_types();
 
-<h1><?php echo __( 'MX Like Button settings', 'mxmlb-domain' ); ?></h1>
+$row_options_for_post_type = mxmlb_get_like_option_by_name( '_turn_of_for_post_types' );
 
-<h2><?php echo __( 'You can change the images below.', 'mxmlb-domain' ); ?></h2>
-
-<p><i><?php echo __( 'Recommended image size 50x50 px. and picture formats - .png', 'mxmlb-domain' ); ?></i></p>
-
-<?php 
-
-// display blocks for downloading new images
-$upload_images_serialize = mxmlb_like_options( '_upload_images' )->mx_like_option_value;
-
-$images_array = maybe_unserialize( $upload_images_serialize );
+$row_options_for_post_type = maybe_unserialize( $row_options_for_post_type->mx_like_option_value );
 
 ?>
 
-<?php foreach( $images_array as $key => $value ) : ?>
+<h2><?php echo __( 'List of post types:', 'mxmlb-domain' ); ?></h2>
+
+<form action="" id="mxmlb_post_type_form">
+
+	<p><?php echo __( 'You can turn off the "MX Like Button" for some types of posts.', 'mxmlb-domain' ); ?></p>
 
 	<?php
+		// for BuddyPress
+		$bp_checked = '';
 
-		$image_url = MXMLB_PLUGIN_URL . 'includes/frontend/assets/img/' . $key . '.png';
+		$bp_mxmlb_post_type_turn_of = 'mxmlb_post_type_turn_of';
 
-		if( $value !== '' ) {
+		if( !in_array( 'bp', $row_options_for_post_type ) ) {
 
-			$image_url = get_site_url() . '/' . $value;
+			$bp_checked = 'checked';
+
+			$bp_mxmlb_post_type_turn_of = '';
 
 		}
 
 	?>
 
-	<div class="mx-block_wrap">
-
-		<h3><?php echo __( $key . ' button', 'mxmlb-domain' ); ?></h3>
-
-		<div class="mx-like-preview-wrap">
-			<img src="<?php echo $image_url; ?>" alt="" class="mx-like-preview" />
-			<button data-type-like="<?php echo $key; ?>" class="mx-btn-remove" <?php echo $value == '' ? 'style="display: none;"' : ''; ?> title="<?php echo __( 'Remove this image', 'mxmlb-domain' ); ?>"><i class="fa fa-close"></i></button>
-		</div>
-
-		<form enctype="multipart/form-data" action="" method="POST" class="mxmlb_form_upload_like_img">
-
-			<input name="bl_upload_<?php echo $key; ?>" data-type-like="<?php echo $key; ?>" class="lb_upload_img" type="file" />
-			<input type="submit" value="<?php echo __( 'Upload Image', 'mxmlb-domain' ); ?>" />
-
-		</form>
+	<div class="mx-post-type-box <?php echo $bp_mxmlb_post_type_turn_of; ?>">
+			
+		<input type="checkbox" class="mx_post_type_checkbox" id="mx_bp" data-post-type="bp" <?php echo $bp_checked; ?> />
+		<label for="mx_bp">BuddyPress</label>
 
 	</div>
 
-<?php endforeach; ?>
+	<?php foreach( $post_types as $post_type ) : ?>
+
+		<?php 
+
+			$checked = 'checked';
+
+			$mxmlb_post_type_turn_of = '';
+
+			if( !in_array( $post_type, $row_options_for_post_type ) ) {
+
+				$checked = '';
+
+				$mxmlb_post_type_turn_of = 'mxmlb_post_type_turn_of';
+
+			}
+
+		?>
+	
+		<div class="mx-post-type-box <?php echo $mxmlb_post_type_turn_of; ?>">
+			
+			<input type="checkbox" class="mx_post_type_checkbox" id="mx_<?php echo $post_type; ?>" data-post-type="<?php echo $post_type; ?>" <?php echo $checked; ?> />
+			<label for="mx_<?php echo $post_type; ?>"><?php echo $post_type; ?></label>
+
+		</div>
+
+	<?php endforeach; ?>
+
+</form>

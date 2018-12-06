@@ -69,3 +69,32 @@
 img.mx-like-preview {
     width: 100%;
 }
+
+/*navbar*/
+.mxmlb_admin_nav_bar {
+    width: 100%;
+    display: inline-block;
+    border-bottom: 1px solid #ddd;
+}
+.mxmlb_admin_nav_bar li {
+    float: left;
+    border: 1px solid #ddd;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+.mxmlb_admin_nav_bar li a {
+    padding: 10px 22px;
+    display: inline-block;
+}
+.mxmlb_active_item_menu {
+    background-color: #fff;
+}
+.mx-post-type-box {
+    margin-bottom: 10px;
+}
+.mx-post-type-box label {
+    font-weight: bold;
+}
+.mxmlb_post_type_turn_of {
+    opacity: 0.5;
+}
