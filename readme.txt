@@ -2,7 +2,7 @@
 Contributors: markomaksym
 Tags: buddypress, activity, facebook like button, fb like, fb like button, like, like button
 Requires at least: 4.7
-Tested up to: 4.9
+Tested up to: 5.0
 Stable tag: 1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -31,7 +31,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 	<b>How does it work?</b>
 </p>
 
-<iframe width="600" height="320" src="https://www.youtube.com/embed/71SYy3L1fNI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="600" height="320" src="https://www.youtube.com/embed/LwRjXZX3YSY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 == Installation ==
 
@@ -46,6 +46,12 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 1. Download 'MX Like Button'.
 2. Upload the 'MX Like Button' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
 3. Activate 'MX Like Button' from your Plugins page.
+
+= Additional information =
+When you upgrade "MX LIKE BUTTON" to 1.1 version, you have to:
+1. Link "update now" button in your dashboard.
+2. After upgrade processing you need to deactivate plugin.
+3. Activate the "MX LIKE BUTTON" again.
 
 == Screenshots ==
 

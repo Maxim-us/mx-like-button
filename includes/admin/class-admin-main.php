@@ -27,7 +27,7 @@ class MXMLBAdminMain
 	{
 
 		// require database-talk class
-		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\admin\class-database-talk.php';
+		require_once 'class-database-talk.php';
 
 	}
 

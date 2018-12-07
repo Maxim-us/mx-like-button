@@ -30,7 +30,7 @@ class MXMLBFrontEndMain
 	{
 
 		// require database-talk class
-		require_once MXMLB_PLUGIN_ABS_PATH . 'includes\frontend\class-database-talk.php';
+		require_once MXMLB_PLUGIN_ABS_PATH . 'includes/frontend/class-database-talk.php';
 
 	}
 

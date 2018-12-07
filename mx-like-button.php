@@ -4,7 +4,7 @@ Plugin Name: MX Like Button
 Plugin URI: https://github.com/Maxim-us/mx-like-button
 Description: Brief description
 Author: Marko Maksym
-Version: 1.0
+Version: 1.1
 Author URI: https://github.com/Maxim-us
 */
 

@@ -44,15 +44,15 @@ $row_options_for_post_type = maybe_unserialize( $row_options_for_post_type->mx_l
 
 		<?php 
 
-			$checked = 'checked';
+			$checked = '';
 
-			$mxmlb_post_type_turn_of = '';
+			$mxmlb_post_type_turn_of = 'mxmlb_post_type_turn_of';
 
 			if( !in_array( $post_type, $row_options_for_post_type ) ) {
 
-				$checked = '';
+				$checked = 'checked';
 
-				$mxmlb_post_type_turn_of = 'mxmlb_post_type_turn_of';
+				$mxmlb_post_type_turn_of = '';
 
 			}
 

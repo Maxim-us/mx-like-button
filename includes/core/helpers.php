@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 */
 function mxmlb_require_template_admin( $file ) {
 
-	require_once MXMLB_PLUGIN_ABS_PATH . 'includes\admin\templates\\' . $file;
+	require_once MXMLB_PLUGIN_ABS_PATH . 'includes/admin/templates/' . $file;
 
 }
 
@@ -17,7 +17,7 @@ function mxmlb_require_template_admin( $file ) {
 */
 function mxmlb_include_template_frontend( $file ) {
 
-	include MXMLB_PLUGIN_ABS_PATH . 'includes\frontend\templates\\' . $file;
+	include MXMLB_PLUGIN_ABS_PATH . 'includes/frontend/templates/' . $file;
 
 }
 
@@ -132,7 +132,7 @@ function mxmlb_display_mx_like_button_template() {
 
 	$post_type = get_post_type( get_the_ID() );
 
-	if( in_array( $post_type, $array_of_post_types_optyons ) ) {
+	if( !in_array( $post_type, $array_of_post_types_optyons ) ) {
 
 		$html = '<div class="mx-like-box" id="mx-like-button-' . get_the_ID() . '"  data-post-type="' . $post_type . '">';
 
