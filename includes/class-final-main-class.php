@@ -71,7 +71,16 @@ final class MXMLBMXLikeButton
 		if( ! defined( $mame ) )
 		{
 
-			define( $mame, $value );
+			// if $value is array
+			if( is_array( $value ) ) {
+
+				define( $mame, serialize( $value ) );
+
+			} else {
+
+				define( $mame, $value );
+
+			}			
 
 		}
 

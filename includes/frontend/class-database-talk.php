@@ -45,7 +45,9 @@ class MXMLBDataBaseTalkFrontend
 			// db query
 			global $wpdb;
 
-			$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
+			$mxmlb_table_slugs = unserialize( MXMLB_TABLE_SLUGS );
+
+			$table_name = $wpdb->prefix . $mxmlb_table_slugs[1];
 
 			$post_id = intval( $_POST['mxmlb_object_likes']['post_id'] );
 
@@ -79,7 +81,9 @@ class MXMLBDataBaseTalkFrontend
 			// db query
 			global $wpdb;
 
-			$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
+			$mxmlb_table_slugs = unserialize( MXMLB_TABLE_SLUGS );
+
+			$table_name = $wpdb->prefix . $mxmlb_table_slugs[1];
 
 			// check user choise
 			$user_ids = array(
@@ -117,7 +121,9 @@ class MXMLBDataBaseTalkFrontend
 			// db query
 			global $wpdb;
 
-			$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
+			$mxmlb_table_slugs = unserialize( MXMLB_TABLE_SLUGS );
+
+			$table_name = $wpdb->prefix . $mxmlb_table_slugs[1];
 
 			// select data
 			$user_ids_row = $wpdb->get_row(
@@ -221,7 +227,9 @@ class MXMLBDataBaseTalkFrontend
 			// db query
 			global $wpdb;
 
-			$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
+			$mxmlb_table_slugs = unserialize( MXMLB_TABLE_SLUGS );
+
+			$table_name = $wpdb->prefix . $mxmlb_table_slugs[1];
 
 			// select data
 			$user_ids_row = $wpdb->get_row(

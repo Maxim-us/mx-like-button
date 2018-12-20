@@ -18,8 +18,10 @@ class MXMLBBasisPluginClass
 		// Create table
 		global $wpdb;
 
+		$table_slugs = unserialize( self::$table_slugs );
+
 		// Table names
-		foreach ( self::$table_slugs as $table_slug ) {
+		foreach ( $table_slugs as $table_slug ) {
 
 			$table_name = $wpdb->prefix . $table_slug;
 

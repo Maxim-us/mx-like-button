@@ -3,7 +3,7 @@ Contributors: markomaksym
 Tags: buddypress, activity, facebook like button, fb like, fb like button, like, like button
 Requires at least: 4.7
 Tested up to: 5.0
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,8 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 <p>
 	Your users will be able to express emotions at a particular post in your Website. This plugin is similar to the <b>Facebook "Like system"</b> but very simplified. <br>
-	You can also change the images of each button.
+	You can also change the images of each button. <br>
+	If you have any questions, please, inbox me to my <a href="https://www.facebook.com/profile.php?id=100011204207772" target="_blank">Facebook profile</a>.
 </p>
 
 <p>
@@ -65,3 +66,6 @@ When you upgrade "MX LIKE BUTTON" to 1.1 version, you have to:
 
 = 1.1 =
 * Now MX Like Button has ability to turn on particular post types.
+
+= 1.1.1 =
+* Fix an error of constant definition.

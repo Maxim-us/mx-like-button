@@ -60,7 +60,9 @@ class MXMLBDataBaseTalk
 
 			global $wpdb;
 
-			$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[0];
+			$mxmlb_table_slugs = unserialize( MXMLB_TABLE_SLUGS );
+
+			$table_name = $wpdb->prefix . $mxmlb_table_slugs[0];
 
 			$upload_images_serialize = mxmlb_get_like_option_by_name( '_upload_images' )->mx_like_option_value;
 
@@ -170,7 +172,9 @@ class MXMLBDataBaseTalk
 
 			global $wpdb;
 
-			$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[0];
+			$mxmlb_table_slugs = unserialize( MXMLB_TABLE_SLUGS );
+
+			$table_name = $wpdb->prefix . $mxmlb_table_slugs[0];
 
 			$get_images_serialize = mxmlb_get_like_option_by_name( '_upload_images' )->mx_like_option_value;
 

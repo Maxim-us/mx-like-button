@@ -28,7 +28,9 @@ function mxmlb_select_data_likes() {
 
 	global $wpdb;
 
-	$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
+	$mxmlb_table_slugs = unserialize( MXMLB_TABLE_SLUGS );
+
+	$table_name = $wpdb->prefix . $mxmlb_table_slugs[1];
 
 	$get_data_likes = $wpdb->get_results( "SELECT id, post_id, user_ids, post_type FROM $table_name ORDER BY id ASC" );
 
@@ -43,7 +45,9 @@ function mxmlb_select_data_likes_by_post_id( $post_id, $post_type ) {
 
 	global $wpdb;
 
-	$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[1];
+	$mxmlb_table_slugs = unserialize( MXMLB_TABLE_SLUGS );
+
+	$table_name = $wpdb->prefix . $mxmlb_table_slugs[1];
 
 	$get_data_likes = $wpdb->get_var( 
 		$wpdb->prepare(
@@ -66,7 +70,9 @@ function mxmlb_get_like_option_by_name( $option_name ) {
 
 	global $wpdb;
 
-	$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[0];
+	$mxmlb_table_slugs = unserialize( MXMLB_TABLE_SLUGS );
+
+	$table_name = $wpdb->prefix . $mxmlb_table_slugs[0];
 
 	$option_value = $wpdb->get_row( "SELECT mx_like_option_value FROM $table_name WHERE mx_like_option_name = '$option_name'" );
 
@@ -104,7 +110,9 @@ function mxmlb_update_like_options( $option_name, $option_value ) {
 
 	global $wpdb;
 
-	$table_name = $wpdb->prefix . MXMLB_TABLE_SLUGS[0];
+	$mxmlb_table_slugs = unserialize( MXMLB_TABLE_SLUGS );
+
+	$table_name = $wpdb->prefix . $mxmlb_table_slugs[0];
 
 	// update data
 	$wpdb->update( 
