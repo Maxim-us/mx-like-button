@@ -30,7 +30,7 @@ final class MXMLBMXLikeButton
 		$this->mxmlb_define( 'MXMLB_PLUGIN_ABS_PATH', dirname( MXMLB_PLUGIN_PATH ) . '/' );
 
 		// version
-		$this->mxmlb_define( 'MXMLB_PLUGIN_VERSION', '1.1' ); // Must be replaced before production on for example '1.1'
+		$this->mxmlb_define( 'MXMLB_PLUGIN_VERSION', '1.4' ); // Must be replaced before production on for example '1.1'
 
 
 	}
@@ -50,6 +50,22 @@ final class MXMLBMXLikeButton
 
 			// Part of the Frontend
 			require_once MXMLB_PLUGIN_ABS_PATH . 'includes/frontend/class-frontend-main.php';
+
+		} else {
+
+			// like options
+			$row_options = mxmlb_get_like_option_by_name( '_turn_of_for_post_types' );
+
+			$array_of_post_types_options = maybe_unserialize( $row_options->mx_like_option_value );
+
+			$post_type = 'switch-on-to-logout-users';
+
+			if( !in_array( $post_type, $array_of_post_types_options ) ) {
+
+				// Part of the Frontend
+				require_once MXMLB_PLUGIN_ABS_PATH . 'includes/frontend/class-frontend-logout.php';
+
+			}			
 
 		}
 

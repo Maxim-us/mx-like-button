@@ -27,8 +27,48 @@ class MXMLBDataBaseTalkFrontend
 
 		// delete like object
 		add_action( 'wp_ajax_mxmlb_delete_like_obj', array( $this, 'prepare_delete_like_obj' ) );
+
+		// get user data
+		add_action( 'wp_ajax_mxmlb_get_user_data', array( $this, 'prepare_get_user_data' ) );
 		
 	}
+
+	/*
+	* Prepare get user data
+	*/
+	public function prepare_get_user_data()
+	{
+
+		// Checked POST nonce is not empty
+		if( empty( $_POST['nonce'] ) ) wp_die( '0' );
+
+		// Checked or nonce match
+		if( wp_verify_nonce( $_POST['nonce'], 'mxmlb_nonce_request' ) ) {
+
+			$this->_get_user_name( $_POST );
+
+		}
+
+		wp_die();
+
+	}
+
+		public function _get_user_name( $_post )
+		{
+
+			$user_meta = get_user_meta( $_post['userId'] );
+
+			$user_name = $user_meta['first_name'][0] . ' ' . $user_meta['last_name'][0];
+
+			if( $user_name == ' ' ) {
+
+				$user_name = $user_meta['nickname'][0];
+
+			}
+
+			echo $user_name;
+
+		} 
 
 	/*
 	* Prepare for data updates

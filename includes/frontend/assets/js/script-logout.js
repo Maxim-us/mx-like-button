@@ -29,36 +29,7 @@
 		var setTimeoutShowLikeBox = null;
 
 		var setTimeoutHideLikeBox = null;
-
-		// show like buttons
-		$( document ).on( 'mouseenter', '.mx-like-main-button', function() {
-
-			var _this = $( this );
-
-			setTimeoutShowLikeBox = setTimeout( function() {
-
-				_this.parent().find( '.mx-like-other-faces' ).addClass( 'mx-like-other-faces-active' );
-
-			},800 );
-
-			clearTimeout( setTimeoutHideLikeBox );
-
-		} );
-
-		// hidden like buttons
-		$( document ).on( 'mouseleave', '.mx-like-main-button', function() {
-
-			var _this = $( this );
-
-			setTimeoutHideLikeBox = setTimeout( function() {
-
-				_this.parent().find( '.mx-like-other-faces' ).removeClass( 'mx-like-other-faces-active' );
-
-			},800 );
-
-			clearTimeout( setTimeoutShowLikeBox );
-
-		} );
+		
 
 		/*
 		* reading the like object and set the like data
@@ -173,24 +144,6 @@
 							 		mxmlb_localize.mxmlb_object_likes[getPostType][postId] = {};
 									mxmlb_localize.mxmlb_object_likes[getPostType][postId][userId] = objLike;
 
-									// save data
-									var data = {
-
-										'action': 'mxmlb_mounting_like_obj',
-										'nonce': mxmlb_localize.mxmlb_nonce,
-										'mxmlb_object_likes': {
-											'post_id' 	: postId,
-											'postType' 		: getPostType,
-											'user_ids'	: {
-												'id' 			: userId,
-												'typeOfLike' 	: objLike.typeOfLike
-											}
-										}
-
-									};
-
-									mxmlb_talkig_data( data );
-
 								// if need 'UPDATE' new like obj
 							 	} else {
 
@@ -198,24 +151,6 @@
 									if( mxmlb_localize.mxmlb_object_likes[getPostType][newPostId][userId] === undefined ) {
 
 										mxmlb_localize.mxmlb_object_likes[getPostType][newPostId][userId] = objLike;
-
-										// save data datastore
-										var data = {
-
-											'action': 'mxmlb_mounting_like_obj',
-											'nonce': mxmlb_localize.mxmlb_nonce,
-											'mxmlb_object_likes': {
-												'post_id' 	: newPostId,
-												'postType' 		: getPostType,
-												'user_ids'	: {
-													'id' 			: userId,
-													'typeOfLike' 	: objLike.typeOfLike
-												}
-											}
-
-										};
-
-										mxmlb_talkig_data( data );
 
 										// show face
 										mxmlb_show_like_faces( $, getPostType, newPostId );
@@ -228,49 +163,11 @@
 
 											delete mxmlb_localize.mxmlb_object_likes[getPostType][newPostId][userId];
 
-											// delete from database
-											var data = {
-
-												'action': 'mxmlb_delete_like_obj',
-												'nonce': mxmlb_localize.mxmlb_nonce,
-												'mxmlb_object_likes': {
-													'post_id' 	: newPostId,
-													'postType' 		: getPostType,
-													'user_ids'	: {
-														'id' 			: userId,
-														'typeOfLike' 	: 'del'
-													}
-												}
-
-											};
-
-											mxmlb_talkig_data( data );
-
-											// console.log( 'delete' );
-
+											
 										// or update like object
 										} else {
 
 											mxmlb_localize.mxmlb_object_likes[getPostType][newPostId][userId] = objLike;
-
-
-											// update database
-											var data = {
-
-												'action': 'mxmlb_mounting_like_obj',
-												'nonce': mxmlb_localize.mxmlb_nonce,
-												'mxmlb_object_likes': {
-													'post_id' 	: newPostId,
-													'postType' 		: getPostType,
-													'user_ids'	: {
-														'id' 			: userId,
-														'typeOfLike' 	: objLike.typeOfLike
-													}
-												}
-
-											};
-
-											mxmlb_talkig_data( data );
 
 											// show face
 											mxmlb_show_like_faces( $, getPostType, newPostId );
@@ -315,24 +212,6 @@
 					mxmlb_localize.mxmlb_object_likes[getPostType] = {};
 					mxmlb_localize.mxmlb_object_likes[getPostType][postId] = {};
 					mxmlb_localize.mxmlb_object_likes[getPostType][postId][userId] = objLike;
-
-					// save data
-					var data = {
-
-						'action': 'mxmlb_mounting_like_obj',
-						'nonce': mxmlb_localize.mxmlb_nonce,
-						'mxmlb_object_likes': {
-							'post_id' 	: postId,
-							'postType' 		: getPostType,
-							'user_ids'	: {
-								'id' 			: userId,
-								'typeOfLike' 	: objLike.typeOfLike
-							}
-						}
-
-					};
-
-					mxmlb_talkig_data( data );
 
 					/*
 					* get object for particular post and set count, type of likes
@@ -543,18 +422,7 @@
 		mxmlb_app.load_more_key = false;
 
 	}
-
-	// ajax
-	function mxmlb_talkig_data( data ) {
-
-		jQuery.post( mxmlb_localize.ajaxurl, data, function( response ) {
-
-			// console.log( response );
-
-		} );
-
-	}
-
+	
 	/*
 	* Document ready or Uploading a page 
 	*/

@@ -86,6 +86,10 @@ class MXMLBAdminMain
 
 				switch( $_GET['p'] ) {
 
+					case 'go_to_pro_version' :
+						$action = 'go_to_pro_version.php';
+						break;
+
 					case 'change_buttons' :
 						$action = 'change_buttons.php';
 						break;

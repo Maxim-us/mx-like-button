@@ -161,30 +161,34 @@ function mxmlb_display_mx_like_button_template() {
 
 		$html .= '</div>';
 
-		$html .= '<button class="mx-like-main-button" data-like-type="like">';
-			$html .= '<span>like</span>';
-		$html .= '</button>';
+		if( is_user_logged_in() ) {
 
-		$html .= '<div class="mx-like-other-faces">';
-			$html .= '<button class="mx-like-face-like" data-like-type="like">';
+			$html .= '<button class="mx-like-main-button" data-like-type="like">';
 				$html .= '<span>like</span>';
 			$html .= '</button>';
-			$html .= '<button class="mx-like-face-heart" data-like-type="heart">';
-				$html .= '<span>heart</span>';
-			$html .= '</button>';
-			$html .= '<button class="mx-like-face-laughter" data-like-type="laughter">';		
-				$html .= '<span>laughter</span>';
-			$html .= '</button>';
-			$html .= '<button class="mx-like-face-wow" data-like-type="wow">';
-				$html .= '<span>wow</span>';
-			$html .= '</button>';
-			$html .= '<button class="mx-like-face-sad" data-like-type="sad">';
-				$html .= '<span>sad</span>';
-			$html .= '</button>';
-			$html .= '<button class="mx-like-face-angry" data-like-type="angry">';
-				$html .= '<span>angry</span>';
-			$html .= '</button>';
-		$html .= '</div>';
+
+			$html .= '<div class="mx-like-other-faces">';
+				$html .= '<button class="mx-like-face-like" data-like-type="like">';
+					$html .= '<span>like</span>';
+				$html .= '</button>';
+				$html .= '<button class="mx-like-face-heart" data-like-type="heart">';
+					$html .= '<span>heart</span>';
+				$html .= '</button>';
+				$html .= '<button class="mx-like-face-laughter" data-like-type="laughter">';		
+					$html .= '<span>laughter</span>';
+				$html .= '</button>';
+				$html .= '<button class="mx-like-face-wow" data-like-type="wow">';
+					$html .= '<span>wow</span>';
+				$html .= '</button>';
+				$html .= '<button class="mx-like-face-sad" data-like-type="sad">';
+					$html .= '<span>sad</span>';
+				$html .= '</button>';
+				$html .= '<button class="mx-like-face-angry" data-like-type="angry">';
+					$html .= '<span>angry</span>';
+				$html .= '</button>';
+			$html .= '</div>';
+
+		}		
 
 		$html .= '</div>';
 
@@ -195,5 +199,78 @@ function mxmlb_display_mx_like_button_template() {
 		return '';
 
 	}
+
+}
+
+/*
+* check time for PRO version
+*/
+function mxmlb_pro_version_available() {
+
+	$_hour = 3600;
+
+	$_day = 3600 * 24;
+
+	$five_days = $_day * 5;
+
+	$time_instal = get_option( 'mx_like_button_pro' );
+
+	if( mxmlb_pro_version_active() ) {
+
+		return true;
+
+	}
+
+	$current_time = time();
+
+	$time_difference = intval( $current_time ) - intval( $time_instal );
+
+	if( $time_difference > $five_days ) {
+
+		return false;
+
+	}
+
+	return true;
+
+}
+
+/*
+* PRO version is active
+*/
+function mxmlb_pro_version_active() {
+
+	$time_instal = get_option( 'mx_like_button_pro' );
+
+	if( $time_instal == 'active' ) {
+
+		return true;
+
+	}
+
+	return false;
+
+}
+
+/*
+* check time for PRO version
+*/
+function mxmlb_pro_version_count() {
+
+	$_hour = 3600;
+
+	$_day = 3600 * 24;
+
+	$five_days = $_day * 5;
+
+	$time_instal = get_option( 'mx_like_button_pro' );
+
+	$current_time = time();
+
+	$time_difference = ( intval( $current_time ) / $_day ) - ( intval( $time_instal ) / $_day );
+
+	$day_difference = 5 - floor( $time_difference );
+
+	return $day_difference;
 
 }

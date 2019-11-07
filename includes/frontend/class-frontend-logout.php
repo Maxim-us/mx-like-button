@@ -3,7 +3,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class MXMLBFrontEndMain
+class MXMLBFrontEndLogout
 {
 
 	public $plugin_name;
@@ -52,36 +52,17 @@ class MXMLBFrontEndMain
 		public function mxmlb_enqueue()
 		{
 
-			wp_enqueue_style( 'mxmlb_font_awesome', MXMLB_PLUGIN_URL . 'assets/font-awesome-4.6.3/css/font-awesome.min.css' );
+			wp_enqueue_style( 'mxmlb_font_awesome_logout', MXMLB_PLUGIN_URL . 'assets/font-awesome-4.6.3/css/font-awesome.min.css' );
 
-			wp_enqueue_style( 'mxmlb_style', MXMLB_PLUGIN_URL . 'includes/frontend/assets/css/style.css', array( 'mxmlb_font_awesome' ), MXMLB_PLUGIN_VERSION, 'all' );
+			wp_enqueue_style( 'mxmlb_style_logout', MXMLB_PLUGIN_URL . 'includes/frontend/assets/css/style-logout.css', array( 'mxmlb_font_awesome_logout' ), MXMLB_PLUGIN_VERSION, 'all' );
 
-			wp_enqueue_script( 'mxmlb_script', MXMLB_PLUGIN_URL . 'includes/frontend/assets/js/script.js', array( 'jquery' ), MXMLB_PLUGIN_VERSION, false );
-
-			if( mxmlb_pro_version_available() ) {
-
-				// like options
-				$row_options = mxmlb_get_like_option_by_name( '_turn_of_for_post_types' );
-
-				$array_of_post_types_options = maybe_unserialize( $row_options->mx_like_option_value );
-
-				$post_type = 'mx-like-popup';
-
-				if( !in_array( $post_type, $array_of_post_types_options ) ) {
-
-					wp_enqueue_script( 'mxmlb_popup_script', MXMLB_PLUGIN_URL . 'includes/frontend/assets/js/mx-poput.js', array( 'mxmlb_script' ), MXMLB_PLUGIN_VERSION, false );
-
-				}
-
-			}			
+			wp_enqueue_script( 'mxmlb_script_logout', MXMLB_PLUGIN_URL . 'includes/frontend/assets/js/script-logout.js', array( 'jquery' ), MXMLB_PLUGIN_VERSION, false );		
 
 			// localize like object
-			wp_localize_script( 'mxmlb_script', 'mxmlb_localize', array(
+			wp_localize_script( 'mxmlb_script_logout', 'mxmlb_localize', array(
 
 				'mxmlb_object_likes' 		=> $this->mxmlb_get_data_of_likes(),
-				'mxmlb_current_user_data' 	=> array( 'id' => get_current_user_id() ),
-				'ajaxurl' 					=> admin_url( 'admin-ajax.php' ),
-				'mxmlb_nonce' 				=> wp_create_nonce( 'mxmlb_nonce_request' )
+				'mxmlb_current_user_data' 	=> array( 'id' => get_current_user_id() )
 
 			) );
 
@@ -93,18 +74,37 @@ class MXMLBFrontEndMain
 	public function mxmlb_show_like_button_hooks()
 	{
 
-		add_action( 'bp_activity_entry_meta', array( $this, 'mxmlb_show_like_button_activity' ) );
+		// activity
+		add_action( 'bp_before_activity_entry_comments', array( $this, 'mxmlb_show_bp_activity_for_logout_users' ) );
 
 		// activity reply
-		add_action( 'bp_activity_comment_options', array( $this, 'mxmlb_show_like_button_activity_reply' ) );
+		add_action( 'bp_activity_comment_options', array( $this, 'mxmlb_show_like_button_activity_reply_for_logout_users' ) );	
+
 
 	}
 
-		// like buttons reply
-		public function mxmlb_show_like_button_activity_reply()
-		{
+	// show for logout users
+	public function mxmlb_show_bp_activity_for_logout_users()
+	{
 
-			if( mxmlb_pro_version_available() ) {
+		// like options
+		$row_options = mxmlb_get_like_option_by_name( '_turn_of_for_post_types' );
+
+		$array_of_post_types_options = maybe_unserialize( $row_options->mx_like_option_value );
+
+		$post_type = 'bp';
+
+		if( !in_array( $post_type, $array_of_post_types_options ) ) {
+
+			mxmlb_include_template_frontend( 'mx-like-box-logout.php' );
+
+		}
+
+	}
+
+	public function mxmlb_show_like_button_activity_reply_for_logout_users()
+	{
+		if( mxmlb_pro_version_available() ) {
 
 				// like options
 				$row_options = mxmlb_get_like_option_by_name( '_turn_of_for_post_types' );
@@ -115,32 +115,13 @@ class MXMLBFrontEndMain
 
 				if( !in_array( $post_type, $array_of_post_types_options ) ) {
 
-					mxmlb_include_template_frontend( 'mx-like-box-reply.php' );
+					mxmlb_include_template_frontend( 'mx-like-box-reply-logout.php' );
 
 				}
 
-			}			
+			}	
+	}
 
-		}
-
-		// like button activities
-		public function mxmlb_show_like_button_activity()
-		{
-
-			// like options
-			$row_options = mxmlb_get_like_option_by_name( '_turn_of_for_post_types' );
-
-			$array_of_post_types_options = maybe_unserialize( $row_options->mx_like_option_value );
-
-			$post_type = 'bp';
-
-			if( !in_array( $post_type, $array_of_post_types_options ) ) {
-
-				mxmlb_include_template_frontend( 'mx-like-box.php' );
-
-			}
-
-		}
 
 	/*
 	* Get data of likes
@@ -272,7 +253,7 @@ class MXMLBFrontEndMain
 }
 
 // Initialize
-$initialize_class = new MXMLBFrontEndMain();
+$initialize_class = new MXMLBFrontEndLogout();
 
 // Apply scripts and styles
 $initialize_class->mxmlb_register();

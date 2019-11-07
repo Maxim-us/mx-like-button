@@ -2,8 +2,8 @@
 Contributors: markomaksym
 Tags: buddypress, activity, facebook like button, fb like, fb like button, like, like button
 Requires at least: 4.7
-Tested up to: 5.0
-Stable tag: 1.1.1
+Tested up to: 5.2
+Stable tag: 1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,11 +61,20 @@ When you upgrade "MX LIKE BUTTON" to 1.1 version, you have to:
 
 == Changelog ==
 
-= 1.0 =
-* MX Like Button
+= 1.4 =
+* Switch off MX Like Button to non-signed-in users.
+
+= 1.3 =
+* A popup has been added. You can see the names of the users who voted for a particular item. 
+
+= 1.2 =
+* Since version 1.2 Mx Like Button available for BuddyPress Comments (Reply)
+
+= 1.1.1 =
+* Fix an error of constant definition.
 
 = 1.1 =
 * Now MX Like Button has ability to turn on particular post types.
 
-= 1.1.1 =
-* Fix an error of constant definition.
+= 1.0 =
+* MX Like Button

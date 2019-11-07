@@ -67,4 +67,30 @@ $row_options_for_post_type = maybe_unserialize( $row_options_for_post_type->mx_l
 
 	<?php endforeach; ?>
 
+	<!--  -->
+	<p><?php echo __( 'Switch off MX Like Button to non-signed-in users.', 'mxmlb-domain' ); ?></p>
+
+	<?php
+		// for BuddyPress
+		$bp_checked = '';
+
+		$bp_mxmlb_post_type_turn_of = 'mxmlb_post_type_turn_of';
+
+		if( !in_array( 'switch-on-to-logout-users', $row_options_for_post_type ) ) {
+
+			$bp_checked = 'checked';
+
+			$bp_mxmlb_post_type_turn_of = '';
+
+		}
+
+	?>
+
+	<div class="mx-post-type-box <?php echo $bp_mxmlb_post_type_turn_of; ?>">
+			
+		<input type="checkbox" class="mx_post_type_checkbox" id="mx_switch-on-to-logout-users" data-post-type="switch-on-to-logout-users" <?php echo $bp_checked; ?> />
+		<label for="mx_switch-on-to-logout-users">Show to non-signed-in users</label>
+
+	</div>
+
 </form>

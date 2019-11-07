@@ -2,9 +2,9 @@
 /*
 Plugin Name: MX Like Button
 Plugin URI: https://github.com/Maxim-us/mx-like-button
-Description: Brief description
+Description: MX Like Button" will add a mechanism of "like buttons" similar to Facebook to your website.
 Author: Marko Maksym
-Version: 1.1.1
+Version: 1.4
 Author URI: https://github.com/Maxim-us
 */
 
@@ -77,5 +77,10 @@ if ( ! class_exists( 'MXMLBMXLikeButton' ) ) {
 		load_plugin_textdomain( 'mxmlb-domain', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 	}
+
+	/*
+	* PRO
+	*/
+	add_option( 'mx_like_button_pro', time() );
 
 }
