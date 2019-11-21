@@ -81,6 +81,6 @@ if ( ! class_exists( 'MXMLBMXLikeButton' ) ) {
 	/*
 	* PRO
 	*/
-	add_option( 'mx_like_button_pro', time() );
+	add_option( 'mx_like_button_pro', 'active' );
 
 }
