@@ -261,8 +261,13 @@ class MXMLBFrontEndMain
 
 		public function mxmlb_show_like_button_into_post( $content )
 		{
+
 			
-			$content .= mxmlb_display_mx_like_button_template();
+			if( mxmlb_turn_off_home_page() ) {
+
+				$content .= mxmlb_display_mx_like_button_template();
+
+			}
 
 			return $content;
 

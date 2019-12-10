@@ -2,8 +2,8 @@
 Contributors: markomaksym
 Tags: buddypress, activity, facebook like button, fb like, fb like button, like, like button
 Requires at least: 4.7
-Tested up to: 5.2
-Stable tag: 1.4
+Tested up to: 5.3
+Stable tag: 1.4.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,12 @@ When you upgrade "MX LIKE BUTTON" to 1.1 version, you have to:
 2. Administration panel of the MX Like Button
 
 == Changelog ==
+
+= 1.4.2 =
+* Turn off/on MX Like Button on home page.
+
+= 1.4.1 =
+* Pro version for free.
 
 = 1.4 =
 * Switch off MX Like Button to non-signed-in users.

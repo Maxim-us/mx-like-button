@@ -274,3 +274,27 @@ function mxmlb_pro_version_count() {
 	return $day_difference;
 
 }
+
+/*
+* turn off on home page
+*/
+function mxmlb_turn_off_home_page() {
+
+	$row_options = mxmlb_get_like_option_by_name( '_turn_of_for_post_types' );
+
+	$array_of_post_types_options = maybe_unserialize( $row_options->mx_like_option_value );
+
+	$home_page_key = 'mx-like-enable_homepage';		
+
+	if( !in_array( $home_page_key, $array_of_post_types_options ) ) {
+
+		if( is_home() || is_front_page() ) {
+		
+			return false;
+
+		}
+
+	}
+
+	return true;
+}

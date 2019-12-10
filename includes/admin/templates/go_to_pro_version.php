@@ -39,10 +39,11 @@ $row_options_for_post_type = maybe_unserialize( $row_options_for_post_type->mx_l
 
 	</div>
 
+
 	<p><?php echo __( 'Turn on the "MX Like Button" popup', 'mxmlb-domain' ); ?></p>
 
 	<?php
-		// for BuddyPress
+		// Enable Popup
 		$bp_checked = '';
 
 		$bp_mxmlb_post_type_turn_of = 'mxmlb_post_type_turn_of';
@@ -60,7 +61,32 @@ $row_options_for_post_type = maybe_unserialize( $row_options_for_post_type->mx_l
 	<div class="mx-post-type-box <?php echo $bp_mxmlb_post_type_turn_of; ?> <?php echo !mxmlb_pro_version_available() ? 'mxmlb_post_type_turn_of' : ''; ?>">
 			
 		<input type="checkbox" class="mx_post_type_checkbox" id="mx_mx-like-popup" data-post-type="mx-like-popup" <?php echo $bp_checked; ?> <?php echo !mxmlb_pro_version_available() ? 'disabled' : ''; ?> />
-		<label for="mx_bp-comments">Enable Popup</label>
+		<label for="mx_mx-like-popup">Enable Popup</label>
+
+	</div>
+
+	<p><?php echo __( 'Turn on the "MX Like Button" on home page', 'mxmlb-domain' ); ?></p>
+
+	<?php
+		// Enable on home page
+		$bp_checked = '';
+
+		$bp_mxmlb_post_type_turn_of = 'mxmlb_post_type_turn_of';
+
+		if( in_array( 'mx-like-enable_homepage', $row_options_for_post_type ) ) {
+
+			$bp_checked = 'checked';
+
+			$bp_mxmlb_post_type_turn_of = '';
+
+		}
+
+	?>
+
+	<div class="mx-post-type-box <?php echo $bp_mxmlb_post_type_turn_of; ?> <?php echo !mxmlb_pro_version_available() ? 'mxmlb_post_type_turn_of' : ''; ?>">
+			
+		<input type="checkbox" class="mx_post_type_checkbox" id="mx_mx-like-enable_homepage" data-post-type="mx-like-enable_homepage" <?php echo $bp_checked; ?> <?php echo !mxmlb_pro_version_available() ? 'disabled' : ''; ?> />
+		<label for="mx_mx-like-enable_homepage">Enable on Home Page</label>
 
 	</div>
 	

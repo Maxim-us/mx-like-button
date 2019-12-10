@@ -87,16 +87,20 @@ class MXMLBFrontEndLogout
 	public function mxmlb_show_bp_activity_for_logout_users()
 	{
 
-		// like options
-		$row_options = mxmlb_get_like_option_by_name( '_turn_of_for_post_types' );
+		if( mxmlb_turn_off_home_page() ) {
 
-		$array_of_post_types_options = maybe_unserialize( $row_options->mx_like_option_value );
+			// like options
+			$row_options = mxmlb_get_like_option_by_name( '_turn_of_for_post_types' );
 
-		$post_type = 'bp';
+			$array_of_post_types_options = maybe_unserialize( $row_options->mx_like_option_value );
 
-		if( !in_array( $post_type, $array_of_post_types_options ) ) {
+			$post_type = 'bp';
 
-			mxmlb_include_template_frontend( 'mx-like-box-logout.php' );
+			if( !in_array( $post_type, $array_of_post_types_options ) ) {
+
+				mxmlb_include_template_frontend( 'mx-like-box-logout.php' );
+
+			}
 
 		}
 
@@ -105,6 +109,8 @@ class MXMLBFrontEndLogout
 	public function mxmlb_show_like_button_activity_reply_for_logout_users()
 	{
 		if( mxmlb_pro_version_available() ) {
+
+			if( mxmlb_turn_off_home_page() ) {
 
 				// like options
 				$row_options = mxmlb_get_like_option_by_name( '_turn_of_for_post_types' );
@@ -119,7 +125,9 @@ class MXMLBFrontEndLogout
 
 				}
 
-			}	
+			}
+
+		}	
 	}
 
 
@@ -243,7 +251,11 @@ class MXMLBFrontEndLogout
 		public function mxmlb_show_like_button_into_post( $content )
 		{
 			
-			$content .= mxmlb_display_mx_like_button_template();
+			if( mxmlb_turn_off_home_page() ) {
+
+				$content .= mxmlb_display_mx_like_button_template();
+
+			}
 
 			return $content;
 

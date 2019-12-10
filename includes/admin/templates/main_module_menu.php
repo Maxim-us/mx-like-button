@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					<span class="mx-day-count" title="PRO version available for <?php echo mxmlb_pro_version_count(); ?> days"><?php echo mxmlb_pro_version_count(); ?></span>
 				<?php endif; ?>
 
-				<a href="admin.php?page=mxmlb-mx-like-button-menu&p=go_to_pro_version"><?php echo __( 'PRO Version', 'mxmlb-domain' ); ?></a>
+				<a href="admin.php?page=mxmlb-mx-like-button-menu&p=go_to_pro_version"><?php echo __( 'Additional', 'mxmlb-domain' ); ?></a>
 			</li>
 		<!-- ... chelck PRO -->
 	</ul>

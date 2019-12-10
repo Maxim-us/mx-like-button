@@ -30,7 +30,7 @@ final class MXMLBMXLikeButton
 		$this->mxmlb_define( 'MXMLB_PLUGIN_ABS_PATH', dirname( MXMLB_PLUGIN_PATH ) . '/' );
 
 		// version
-		$this->mxmlb_define( 'MXMLB_PLUGIN_VERSION', '1.4' ); // Must be replaced before production on for example '1.1'
+		$this->mxmlb_define( 'MXMLB_PLUGIN_VERSION', '1.4.2' ); // Must be replaced before production on for example '1.1'
 
 
 	}
